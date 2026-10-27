@@ -12,6 +12,10 @@ public abstract class Vehicle {
     private CargoType currentCargo;
     private int currentAmount;
 
+    private double currentPosition;
+    private boolean movingForward;
+    private Route assignedRoute;
+
     public Vehicle(String id, double speed, int maintenanceCost, int capacity, int purPrice){
         this.id=id;
         this.speed=speed;
@@ -20,6 +24,10 @@ public abstract class Vehicle {
         this.purchasePrice=purPrice;
         this.currentCargo=null;
         this.currentAmount=0;
+
+        this.currentPosition=0;
+        this.movingForward=true;
+        this.assignedRoute = null;
     }
     //getters
     public String getId(){
@@ -44,6 +52,33 @@ public abstract class Vehicle {
     public int getPurchasePrice(){
         return this.purchasePrice;
     }
+
+    public double getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public boolean isMovingForward() {
+        return movingForward;
+    }
+
+    public Route getAssignedRoute() {
+        return assignedRoute;
+    }
+    //Route controllers
+
+
+    public void setAssignedRoute(Route assignedRoute) {
+        this.assignedRoute = assignedRoute;
+    }
+
+    public void setMovingForward(boolean movingForward) {
+        this.movingForward = movingForward;
+    }
+
+    public void setCurrentPosition(double currentPosition) {
+        this.currentPosition = currentPosition;
+    }
+
     //Cargo loader
     public int loadCargo(CargoType cargo, int amount){
         int loadAmount=0;
