@@ -28,15 +28,21 @@ public abstract class Location {
     }
 
     public void addCargo(CargoType cargo, int amount) {
-        if (cargo == null || amount <= 0) {
-            return;
+        if (cargo == null){
+            throw new IllegalArgumentException("A rakomány típusa nem lehet null!");
+        }
+        if( amount <=0){
+            throw new IllegalArgumentException("A hozzáadni kívánt mennyiség pozitív egész szám kell legyen!");
         }
         int currentAmount = getStock(cargo);
         inventory.put(cargo, currentAmount + amount);
     }
     public int takeCargo(CargoType cargo, int requestedAmount){
-        if (cargo == null || requestedAmount <=0){
-            return 0;
+        if (cargo == null){
+            throw new IllegalArgumentException("A rakomány típusa nem lehet null!");
+        }
+        if( requestedAmount <=0){
+            throw new IllegalArgumentException("A felvenni kívánt mennyiség pozitív egész szám kell legyen!");
         }
         int currentStock = getStock(cargo);
         int toTake = Math.min(currentStock, requestedAmount);

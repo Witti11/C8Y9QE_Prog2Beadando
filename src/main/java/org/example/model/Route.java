@@ -85,9 +85,14 @@ public class Route {
             throw new InvalidRouteException("A jármű (" + vehicle.getId() + ") nem közlekedhet ezen a pályatípuson (" + this.type.getDisplayName() + ")!");
         }
         this.assignedVehicle.add(vehicle);
+        vehicle.setAssignedRoute(this);
         return;
     }
     public boolean removeVehicle(Vehicle vehicle){
-        return this.assignedVehicle.remove(vehicle);
+        if(this.assignedVehicle.remove(vehicle)){
+            vehicle.setAssignedRoute(null);
+            return true;
+        }
+        return false;
     }
 }
