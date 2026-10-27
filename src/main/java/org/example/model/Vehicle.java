@@ -78,4 +78,10 @@ public abstract class Vehicle {
         this.currentCargo=null;
         return unload;
     }
+    //RouteType
+    public abstract RouteType getRequiredRouteType();
+
+    public boolean canTravelOn(RouteType routeType){
+        return getRequiredRouteType()==routeType;
+    }
 }

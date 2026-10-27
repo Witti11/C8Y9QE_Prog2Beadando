@@ -11,4 +11,9 @@ public class Train extends Vehicle{
     public TrainType getType() {
         return type;
     }
+
+    @Override
+    public RouteType getRequiredRouteType(){
+        return RouteType.RAIL;
+    }
 }
