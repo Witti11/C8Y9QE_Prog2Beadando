@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.exception.InvalidCargoException;
+
 public abstract class Vehicle {
     private final String id;
     private final double speed;
@@ -46,16 +48,13 @@ public abstract class Vehicle {
     public int loadCargo(CargoType cargo, int amount){
         int loadAmount=0;
         if (amount<=0){
-            System.out.println("Hamis mennyiség!");
-            return loadAmount;
+            throw new IllegalArgumentException("A felrakni kívánt mennyiség pozitív szám kell legyen!");
         }
         if(cargo==null){
-            System.out.println("Típus nem lehet null!");
-            return loadAmount;
+            throw new IllegalArgumentException("A rakomány típusa nem lehet nulla!");
         }
         if(currentCargo!=null && cargo!=currentCargo){
-            System.out.println("Hamis típus!");
-            return loadAmount;
+            throw new InvalidCargoException("Nem lehet eltérő árut felrakni! A járművön már van: " + currentCargo.getDisplayName() + ", felrakni kívánt: " + cargo.getDisplayName());
         }
         int availableSpace=this.capacity-this.currentAmount;
         this.currentCargo=cargo;

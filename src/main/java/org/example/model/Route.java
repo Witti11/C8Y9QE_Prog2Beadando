@@ -3,6 +3,8 @@ package org.example.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.example.exception.InvalidRouteException;
+
 
 public class Route {
     private final String id;
@@ -61,8 +63,7 @@ public class Route {
 
     public void unlock(){
         if (isUnlocked()){
-            System.out.println("Már feloldott");
-            return;
+            throw new InvalidRouteException("Ez az útvonal (" + this.id + ") már fel van oldva!");
         }
         else{
             this.unlocked=true;
@@ -74,9 +75,15 @@ public class Route {
     }
 
     public void addVehicle(Vehicle vehicle){
-        if (vehicle==null){return;}
-        if(!isUnlocked()){return;}
-        if(!vehicle.canTravelOn(this.type)){return;}
+        if (vehicle==null) {
+            throw new IllegalArgumentException("A jármű nem lehet null!");
+        }
+        if(!isUnlocked()){
+            throw new InvalidRouteException("Nem lehet járművet hozzáadni egy még fel nem oldott útvonalhoz (" + this.id + ")!");
+        }
+        if(!vehicle.canTravelOn(this.type)){
+            throw new InvalidRouteException("A jármű (" + vehicle.getId() + ") nem közlekedhet ezen a pályatípuson (" + this.type.getDisplayName() + ")!");
+        }
         this.assignedVehicle.add(vehicle);
         return;
     }
