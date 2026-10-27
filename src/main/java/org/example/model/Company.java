@@ -3,6 +3,7 @@ package org.example.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.example.exception.InsufficientFundsException;
 
 public class Company {
     private final String companyName;
@@ -50,11 +51,10 @@ public class Company {
     }
     public boolean spendMoney(int cost){
         if(cost <=0){
-            return false;
+            throw new IllegalArgumentException("A költség nem lehet nulla!");
         }
         if(!canAfford(cost)){
-            System.out.println("Nincs elég fedezet!");
-            return false;
+            throw new InsufficientFundsException("Nincs elég fedezet a tranzakcióhoz! Szükséges: " + cost + "$,egyenleg: " + this.money + "$");
         }
         this.money-=cost;
         return true;
