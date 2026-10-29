@@ -16,4 +16,9 @@ public class Truck extends Vehicle{
     public RouteType getRequiredRouteType(){
         return RouteType.ROAD;
     }
+
+    @Override
+    public  String getVersionName(){
+        return this.type.name();
+    }
 }

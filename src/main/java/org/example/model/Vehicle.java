@@ -64,6 +64,8 @@ public abstract class Vehicle {
     public Route getAssignedRoute() {
         return assignedRoute;
     }
+
+    public abstract  String getVersionName();
     //Route controllers
 
 
