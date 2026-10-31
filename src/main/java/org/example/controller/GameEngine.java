@@ -1,16 +1,17 @@
 package org.example.controller;
 
 import org.example.model.*;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GameEngine {
+public class GameEngine implements Serializable{
     private final Company company;
     private final List<Location> locations;
     private final List<Route> routes;
     private int currentTurn;
+    private static final long serialVersionUID = 1L;
 
     public GameEngine(Company company){
         this.company = company;

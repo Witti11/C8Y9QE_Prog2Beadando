@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.example.exception.InsufficientFundsException;
+import java.io.Serializable;
 
-public class Company {
+public class Company implements Serializable {
     private final String companyName;
     private int money;
     private final List<Vehicle> ownedVehicles;
+    private static final long serialVersionUID = 1L;
 
     public Company(String name){
         this.companyName=name;
