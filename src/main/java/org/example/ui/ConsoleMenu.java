@@ -204,7 +204,7 @@ public class ConsoleMenu {
                 City c = (City) loc;
                 System.out.println("Város | Igények: ");
                 for (CargoType demand : c.getDemands()) {
-                    System.out.println(demand.getDisplayName() + " (raktár: " + c.getStock(demand) + " db)");
+                    System.out.print(demand.getDisplayName() + " (Teljesítve: " + c.getFulfill(demand) + " db)\t");
                 }
             }
         }
@@ -487,11 +487,17 @@ public class ConsoleMenu {
 
         //2. Producers
         Producer pForest1 = new Producer("P_FOR_1", "Öregtölgy Erdészet", CargoType.WOOD, 5);
+        pForest1.addCargo(CargoType.WOOD,5);
         Producer pForest2 = new Producer("P_FOR_2", "Sötétvölgyi Fatelep", CargoType.WOOD, 5);
+        pForest2.addCargo(CargoType.WOOD,5);
         Producer pFarm1 = new Producer("P_FAR_1", "Aranykalász Birtok", CargoType.GRAIN, 5);
+        pFarm1.addCargo(CargoType.GRAIN,5);
         Producer pFarm2 = new Producer("P_FAR_2", "Déli Ugar Gazdaság", CargoType.GRAIN, 5);
+        pFarm2.addCargo(CargoType.GRAIN,5);
         Producer pMine1 = new Producer("P_MIN_1", "Vashegy Bánya", CargoType.IRON, 5);
+        pMine1.addCargo(CargoType.IRON,5);
         Producer pOil1 = new Producer("P_OIL_1", "Fekete Arany Fúrótorony", CargoType.OIL, 5);
+        pOil1.addCargo(CargoType.OIL,5);
 
         //3. Factories
         Factory fScrew1 = new Factory("F_SCR_1", "Precíziós Kötőelem Művek", CargoType.IRON, CargoType.SCREW, 5);
