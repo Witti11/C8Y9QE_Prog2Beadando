@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.example.exception.InvalidRouteException;
+import java.io.Serializable;
 
 
-public class Route {
+public class Route implements Serializable {
     private final String id;
     private final Location source;
     private final Location destination;
@@ -16,6 +17,7 @@ public class Route {
     private boolean unlocked;
     private CargoType assignedCargo;
     private final List<Vehicle> assignedVehicle;
+    private static final long serialVersionUID = 1L;
 
     public Route(String id, Location source, Location destination, RouteType type, double distance) {
         this.id = id;

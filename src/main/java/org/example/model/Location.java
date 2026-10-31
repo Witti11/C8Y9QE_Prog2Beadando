@@ -2,11 +2,13 @@ package org.example.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
-public abstract class Location {
+public abstract class Location implements Serializable {
     private final String id;
     private final String displayName;
     private final Map<CargoType, Integer> inventory;
+    private static final long serialVersionUID = 1L;
 
     public Location(String id, String displayName){
         this.id=id;

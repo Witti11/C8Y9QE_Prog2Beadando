@@ -1,8 +1,9 @@
 package org.example.model;
 
 import org.example.exception.InvalidCargoException;
+import java.io.Serializable;
 
-public abstract class Vehicle {
+public abstract class Vehicle implements Serializable {
     private final String id;
     private final double speed;
     private final int maintenanceCost;
@@ -15,6 +16,7 @@ public abstract class Vehicle {
     private double currentPosition;
     private boolean movingForward;
     private Route assignedRoute;
+    private static final long serialVersionUID = 1L;
 
     public Vehicle(String id, double speed, int maintenanceCost, int capacity, int purPrice){
         this.id=id;
