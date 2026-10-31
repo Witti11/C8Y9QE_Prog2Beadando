@@ -4,7 +4,7 @@ import org.example.ui.ConsoleMenu;
 
 
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
         ConsoleMenu menu = new ConsoleMenu();
         menu.start();
     }
