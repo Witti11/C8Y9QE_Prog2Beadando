@@ -1,0 +1,43 @@
+=====================================================
+         ÜDVÖZÖLLEK A MUTYI TYCOON ÚTMUTATÓJÁBAN!    
+=====================================================
+
+Itt mindent elsajátíthatsz ahhoz, hogy nekikezdhess egy virágzó,
+sikeres szállítmányozási vállalkozás felépítésének!
+
+1. A CÉL ÉS AZ ALAPOK:
+-----------------------
+- Induló tőke: 2500$.
+- A feladatod: kiépíteni a logisztikai hálózatot, és kielégíteni
+  a megyében található 4 város nyersanyag- és késztermékigényét.
+
+2. A JÁTÉK MENETE ÉS IDŐ:
+--------------------------
+- A játék körökre osztott. Egy körben bármennyi akciót végrehajthatsz.
+- A kör végén (5. menüpont) a járművek elmozdulnak a sebességük szerint.
+- Körváltáskor vonódik le az aktív járművek fenntartási költsége,
+  és ekkor kapod meg a bevételt a célba ért fuvarok után!
+
+3. HÁLÓZAT ÉS JÁRMŰVEK:
+------------------------
+- Egy fuvar indításához először fel kell oldanod az utat a két állomás között:
+    * Közút: olcsóbb (400$), kamionok használhatják.
+    * Vasút: drágább (2000$), de a vonatok gyorsabbak és többet szállítanak.
+- A Boltban vásárolhatsz járműveket, majd az "Útvonal beállítása" és
+  a "Járművek kezelése" menükben állíthatod őket szolgálatba.
+- Szabály: egy útvonalon egyszerre csak egyféle áru szállítható!
+
+4. GYÁRTÁSI LÁNCOK:
+--------------------
+A városok által kért késztermékeket a gyáraknak kell előállítaniuk.
+A gyárak csak akkor termelnek, ha a termelőktől odaszállítod a nyersanyagot!
+    * Búza (Földek)      -> Kenyér (Pékség)       -> Város
+    * Farönk (Erdészet)  -> Bútor (Bútorüzem)     -> Város
+    * Vas (Bánya)        -> Csavar (Kötőelem Művek)-> Város
+    * Nyersolaj (Kút)    -> Benzin (Finomító)     -> Város
+
+5. FONTOS TANÁCS:
+------------------
+Minden birtokolt jármű után körönként fenntartási költséget kell fizetned!
+Mindig figyelj az egyenlegedre, különben csődbe mehet a vállalatod!
+=====================================================
