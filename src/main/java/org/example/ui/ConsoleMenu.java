@@ -2,9 +2,11 @@ package org.example.ui;
 import org.example.controller.GameEngine;
 import org.example.model.*;
 import org.example.command.*;
+import org.example.persistence.SaveManager;
 
 
 import java.io.File;
+import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
@@ -13,10 +15,12 @@ public class ConsoleMenu {
     private GameEngine engine;
     private final Scanner scanner;
     private boolean running;
+    private final SaveManager saveManager;
 
     public ConsoleMenu() {
         this.scanner = new Scanner(System.in);
         this.running=false;
+        this.saveManager= new SaveManager();
     }
 
     private void setupMap() {
@@ -123,8 +127,9 @@ public class ConsoleMenu {
         System.out.println("3. Útvonal beállítása");
         System.out.println("4. Járművek kezelése");
         System.out.println("5. Kör befejezése");
+        System.out.println("6. Játék mentése!");
         System.out.println("0. Kilépés");
-        System.out.println("Mit szeretnél tenni? (0-5): ");
+        System.out.println("Mit szeretnél tenni? (0-6): ");
     }
 
     public void showStatistics(){
@@ -411,6 +416,15 @@ public class ConsoleMenu {
         scanner.nextLine();
     }
 
+    private void saveGame(){
+        System.out.println("Adja meg a mentés nevét!");
+        String saveName = scanner.nextLine().trim();
+        if (saveName.isEmpty()){
+            saveName="quicksave";
+        }
+        new SaveGameCommand(engine,saveName).execute();
+    }
+
     public void start(){
         this.running=true;
         System.out.println("\n===================================");
@@ -459,6 +473,9 @@ public class ConsoleMenu {
                 case "5":
                     new NextTurnCommand(engine).execute();
                     break;
+                case "6":
+                    saveGame();
+                    break;
                 case "0":
                     this.running=false;
                     break;
@@ -482,7 +499,45 @@ public class ConsoleMenu {
     }
 
     private void loadGame(){
-        System.out.println("Majd később!");
+        List<String> saves = saveManager.getAvailableSaves();
+        if (saves.isEmpty()){
+            System.out.println("Nincs elérhető mentés!\nÚj játék indítása!");
+            startNewGame();
+            return;
+        }
+        int num = 1;
+        for(String s :saves){
+            System.out.println(num+". " +s);
+            num++;
+        }
+        System.out.println("Adja meg melyik mentést szeretné folytatni!\nFONTOS a mentés sorszámát adja meg!");
+        String choice=scanner.nextLine().trim();
+        int index = -1;
+        try {
+            index=Integer.parseInt(choice) -1;
+        }catch (NumberFormatException e){
+            System.out.println("Hibás értéket adott meg: "+e.getMessage());
+        }
+
+        String selectedSave;
+        if(index >= 0 && index < saves.size()){
+           selectedSave=saves.get(index);
+        }
+        else{
+            System.out.println("Nincs ilyen mentés!\nÚj játék indítása!");
+            startNewGame();
+            return;
+        }
+        try {
+            this.engine = saveManager.loadGame(selectedSave);
+            System.out.println("Sikeres betöltés: "+selectedSave);
+        } catch (Exception e){
+            System.out.println("Nem sikerült betölteni a mentést: "+e.getMessage());
+            System.out.println("Új játék indítása!");
+            startNewGame();
+        }
+
+
     }
 
 
