@@ -241,7 +241,37 @@ public class ConsoleMenu {
             }
 
         }
-        System.out.println();
+
+        System.out.println("\n===================================");
+        System.out.println("--- ÚTVONALAK ---");
+        System.out.println("===================================");
+        if(engine.numOfUnlockedRoutes()==0){
+            System.out.println("Még nincs feloldott útvonalad!");
+        }
+        else{
+            for(Route r : engine.getRoutes()){
+                if (!r.isUnlocked()){
+                    continue;
+                }
+                if(r.getAssignedCargo()!=null) {
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
+                }else{
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: Még nincs termék beállítva!");
+                }
+                if(r.getAssignedVehicle().isEmpty()){
+                    System.out.println("\tMég nincsenek járművek az útvonalon.");
+                }
+                else{
+                    System.out.print("\tJárművek: ");
+                    for (Vehicle v:r.getAssignedVehicle()){
+                        System.out.print("*"+v.getId()+" Típus: "+v.getVersionName()+"  ");
+                    }
+                    System.out.println();
+                }
+            }
+        }
 
     }
 
