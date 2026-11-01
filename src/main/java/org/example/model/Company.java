@@ -11,11 +11,15 @@ public class Company implements Serializable {
     private int money;
     private final List<Vehicle> ownedVehicles;
     private static final long serialVersionUID = 1L;
+    private int nextTruckId;
+    private int nextTrainId;
 
     public Company(String name){
         this.companyName=name;
         this.money=2500;  //Starting money
         this.ownedVehicles = new ArrayList<>();
+        this.nextTruckId=1;
+        this.nextTrainId=1;
     }
 
     public String getCompanyName() {
@@ -67,6 +71,13 @@ public class Company implements Serializable {
             total += v.getMaintenanceCost();
         }
         return total;
+    }
+
+    public String generateTruckId(){
+        return "K-"+(nextTruckId++);
+    }
+    public String generateTrainId(){
+        return "V-"+(nextTrainId++);
     }
 
 }

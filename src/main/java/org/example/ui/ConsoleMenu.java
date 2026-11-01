@@ -385,7 +385,7 @@ public class ConsoleMenu {
             System.out.println("Nincs ilyen kamion");
             return;
         }
-        String newId = "K-" + (engine.getCompany().getOwnedVehicles().size() + 1);
+        String newId = engine.getCompany().generateTruckId();
         Truck newTruck = new Truck(newId, chosenType);
         new BuyVehicleCommand(engine.getCompany(), newTruck).execute();
     }
@@ -411,7 +411,7 @@ public class ConsoleMenu {
             System.out.println("Nincs ilyen vonat");
             return;
         }
-        String newId = "V-" + (engine.getCompany().getOwnedVehicles().size() + 1);
+        String newId = engine.getCompany().generateTrainId();
         Train newTrain = new Train(newId, chosenType);
         new BuyVehicleCommand(engine.getCompany(), newTrain).execute();
     }
