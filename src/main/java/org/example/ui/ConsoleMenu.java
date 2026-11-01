@@ -84,7 +84,21 @@ public class ConsoleMenu {
                     saveGame();
                     break;
                 case "0":
-                    this.running = false;
+                    System.out.println("El akarod menteni a játékot?");
+                    System.out.println("\tIgen: 1");
+                    System.out.println("\tNem: 2");
+                    String choice=scanner.nextLine().trim();
+                    if (choice.equals("1")){
+                        saveGame();
+                        this.running=false;
+                    } else if (choice.equals("2")) {
+                        this.running=false;
+                    }
+                    else{
+                        System.out.println("Hibás választ adtál meg. Próbáld újra!");
+                        break;
+                    }
+
                     break;
                 default:
                     System.out.println("Érvénytelen válasz, próbálja újra!");
