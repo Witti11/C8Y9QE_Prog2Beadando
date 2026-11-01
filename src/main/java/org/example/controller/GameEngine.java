@@ -44,6 +44,16 @@ public class GameEngine implements Serializable{
         return Collections.unmodifiableList(routes);
     }
 
+    public int numOfUnlockedRoutes(){
+        int num = 0;
+        for (Route r: this.getRoutes()){
+            if(r.isUnlocked()){
+                num++;
+            }
+        }
+        return num;
+    }
+
     public int getCurrentTurn() {
         return currentTurn;
     }
