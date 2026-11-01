@@ -177,8 +177,9 @@ public class ConsoleMenu {
     }
 
     private void head() {
+        int maintenanceCost=engine.getCompany().calculateTotalMaintenanceCost();
         System.out.println("\n===================================");
-        System.out.println("* " + engine.getCompany().getCompanyName() + " * | Kör: " + engine.getCurrentTurn() + " | Egyenleg: " + engine.getCompany().getMoney() + "$");
+        System.out.println("* " + engine.getCompany().getCompanyName() + " * | Kör: " + engine.getCurrentTurn() + " | Egyenleg: " + engine.getCompany().getMoney() + "$ | Fenntartási költség: "+maintenanceCost+"$/kör");
         System.out.println("===================================");
     }
 
