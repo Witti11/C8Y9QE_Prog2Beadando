@@ -64,9 +64,17 @@ public class ConsoleMenu {
                     handleStore();
                     break;
                 case "3":
+                    if (engine.numOfUnlockedRoutes()<=0){
+                        System.out.println("Még nem oldottál fel útvonalat!");
+                        break;
+                    }
                     routeSetter();
                     break;
                 case "4":
+                    if(engine.getCompany().getOwnedVehicles().isEmpty()){
+                        System.out.println("Még nem vásároltál járművet");
+                        break;
+                    }
                     handleVehicles();
                     break;
                 case "5":
