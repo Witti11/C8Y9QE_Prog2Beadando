@@ -484,21 +484,39 @@ public class ConsoleMenu {
         }
         System.out.println("Kiválasztott jármű:");
         printVehicleStatus(v);
-        System.out.println("Útvonalak:");
-        for (Route r : engine.getRoutes()) {
-            if (r.isUnlocked() && r.getType() == v.getRequiredRouteType() && r.getAssignedCargo()!=null) {
-                System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
-                        + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
-            }
+        System.out.println("Mit szeretne tenni ezzel a járművel?(0-2)");
+        System.out.println("1. Útvonalhoz rendelés.");
+        System.out.println("2. Jármű eladás.");
+        System.out.println("0. Kilépés.");
+        String choice = scanner.nextLine().trim();
+        switch (choice){
+            case "1":
+                System.out.println("Útvonalak:");
+                for (Route r : engine.getRoutes()) {
+                    if (r.isUnlocked() && r.getType() == v.getRequiredRouteType() && r.getAssignedCargo()!=null) {
+                        System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                                + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
+                    }
+                }
+                System.out.println("Melyik útvonalhoz szeretnéd adni a járművet?");
+                String routeId = scanner.nextLine().trim();
+                Route route = findRouteById(routeId);
+                if (route == null) {
+                    System.out.println("Nincs ilyen útvonal!");
+                    return;
+                }
+                new AssignVehicleCommand(v, route).execute();
+                break;
+            case "2":
+                new SellVehicleCommand(engine.getCompany(),v).execute();
+                break;
+            case "0":
+                break;
+            default:
+                System.out.println("Érvénytelen válasz! Kilépés.");
+                break;
         }
-        System.out.println("Melyik útvonalhoz szeretnéd adni a járművet?");
-        String routeId = scanner.nextLine().trim();
-        Route route = findRouteById(routeId);
-        if (route == null) {
-            System.out.println("Nincs ilyen útvonal!");
-            return;
-        }
-        new AssignVehicleCommand(v, route).execute();
+
     }
 
     private void saveGame() {
