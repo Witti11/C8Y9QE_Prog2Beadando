@@ -78,7 +78,11 @@ public class ConsoleMenu {
                     handleVehicles();
                     break;
                 case "5":
-                    new NextTurnCommand(engine).execute();
+                    NextTurnCommand nextTurn = new NextTurnCommand(engine);
+                    nextTurn.execute();
+                    if(nextTurn.isGameOver()){
+                        this.running=false;
+                    }
                     break;
                 case "6":
                     saveGame();
