@@ -179,36 +179,39 @@ public class ConsoleMenu {
     private void head() {
         System.out.println("\n===================================");
         System.out.println("* " + engine.getCompany().getCompanyName() + " * | Kör: " + engine.getCurrentTurn() + " | Egyenleg: " + engine.getCompany().getMoney() + "$");
-        System.out.println("\n===================================");
+        System.out.println("===================================");
     }
 
     private void showStatistics() {
         head();
         System.out.println("STATISZTIKÁK");
-        System.out.println("\n--- HELYSZÍNEK ---");
+        System.out.println("===================================");
+        System.out.println("===================================");
+        System.out.println("--- HELYSZÍNEK ---");
+        System.out.println("===================================");
         for (Location loc : engine.getLocations()) {
-            System.out.print("[" + loc.getId() + "] " + loc.getDisplayName() + " -> ");
-
             if (loc instanceof Producer) {
                 Producer p = (Producer) loc;
                 int stock = p.getStock(p.getOutputCargo());
-                System.out.println("Termelő | Termék: " + p.getOutputCargo().getDisplayName() + " | Raktáron: " + stock
+                System.out.println("TERMELŐ "+ p.getDisplayName()+" -> | Termék: " + p.getOutputCargo().getDisplayName() + " | Raktáron: " + stock
                         + " db ( + " + p.getProductionRate() + "/kör)");
             } else if (loc instanceof Factory) {
                 Factory f = (Factory) loc;
                 int inStock = f.getStock(f.getInputCargo());
                 int outStock = f.getStock(f.getOutputCargo());
-                System.out.println("Gyár | Alapanyag (" + f.getInputCargo().getDisplayName() + "): " + inStock + " db | Késztermék (" +
+                System.out.println("GYÁR "+f.getDisplayName()+" -> | Alapanyag (" + f.getInputCargo().getDisplayName() + "): " + inStock + " db | Késztermék (" +
                         f.getOutputCargo().getDisplayName() + "): " + outStock + " db ( + " + f.getProcessingRate() + " /kör)");
             } else if (loc instanceof City) {
                 City c = (City) loc;
-                System.out.println("Város | Igények: ");
+                System.out.println("VÁROS "+c.getDisplayName()+" -> | Igények: ");
                 for (CargoType demand : c.getDemands()) {
-                    System.out.print(demand.getDisplayName() + " (Teljesítve: " + c.getFulfill(demand) + " db)\t");
+                    System.out.print("\t"+demand.getDisplayName() + " (Teljesítve: " + c.getFulfill(demand) + " db)\n");
                 }
             }
         }
-        System.out.println("\n--- JÁRMŰFLOTTA ---");
+        System.out.println("\n===================================");
+        System.out.println("--- JÁRMŰFLOTTA ---");
+        System.out.println("===================================");
         System.out.println("KAMIONOK:");
         if (engine.getCompany().getOwnedVehicles().isEmpty()) {
             System.out.println("Még nincs saját kamionod.");
@@ -223,6 +226,7 @@ public class ConsoleMenu {
             }
         }
         System.out.println();
+        System.out.println("\n===================================");
         System.out.println("VONATOK:");
         if (engine.getCompany().getOwnedVehicles().isEmpty()) {
             System.out.println("Még nincs saját vonatod.");
@@ -237,6 +241,7 @@ public class ConsoleMenu {
             }
 
         }
+        System.out.println();
 
     }
 
@@ -359,8 +364,13 @@ public class ConsoleMenu {
         System.out.println("Feloldott útvonalak:");
         for (Route r : engine.getRoutes()) {
             if (r.isUnlocked()) {
-                System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
-                        + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo());
+                if(r.getAssignedCargo()!=null) {
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
+                }else{
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: Még nincs termék beállítva!");
+                }
             }
         }
         System.out.println("Add meg a módosítani kívánt útvonal azonosítóját! Kilépés:0");
@@ -376,8 +386,13 @@ public class ConsoleMenu {
             return;
         }
         System.out.println("Módosítani kívánt útvonal:");
-        System.out.println("[" + route.getId() + "] " + route.getSource().getDisplayName() + " -> " + route.getDestination().getDisplayName() + " ("
-                + route.getType().getDisplayName() + "," + route.getDistance() + " km) - Termék: " + route.getAssignedCargo());
+        if(route.getAssignedCargo()!=null) {
+            System.out.println("[" + route.getId() + "] " + route.getSource().getDisplayName() + " -> " + route.getDestination().getDisplayName() + " ("
+                    + route.getType().getDisplayName() + "," + route.getDistance() + " km) - Termék: " + route.getAssignedCargo().getDisplayName());
+        }else{
+            System.out.println("[" + route.getId() + "] " + route.getSource().getDisplayName() + " -> " + route.getDestination().getDisplayName() + " ("
+                    + route.getType().getDisplayName() + "," + route.getDistance() + " km) - Termék: Még nincs termék beállítva!");
+        }
         System.out.println("Választható termékek:");
         for (CargoType c : CargoType.values()) {
             System.out.println("Termék: " + c.getDisplayName() + " Ár: " + c.getBaseValue() + "$");
@@ -418,8 +433,13 @@ public class ConsoleMenu {
         System.out.println("Útvonalak:");
         for (Route r : engine.getRoutes()) {
             if (r.isUnlocked() && r.getType() == v.getRequiredRouteType()) {
-                System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
-                        + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo());
+                if(r.getAssignedCargo()!=null) {
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
+                }else {
+                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: Még nincs termék beállítva!");
+                }
             }
         }
         System.out.println("Melyik útvonalhoz szeretnéd adni a járművet?");
