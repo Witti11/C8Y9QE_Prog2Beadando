@@ -44,9 +44,53 @@ public class GameEngine implements Serializable{
         return Collections.unmodifiableList(routes);
     }
 
+    public int numOfUnlockedRoutes(){
+        int num = 0;
+        for (Route r: this.getRoutes()){
+            if(r.isUnlocked()){
+                num++;
+            }
+        }
+        return num;
+    }
+
     public int getCurrentTurn() {
         return currentTurn;
     }
+
+    private void handleEndpoint(Vehicle v, Location loc, CargoType cargo){
+        if (cargo == null) return;
+
+        //Unload
+        if(v.getCurrentAmount()>0){
+            int delivered = v.unloadCargo();
+            loc.addCargo(cargo,delivered);
+
+            boolean getsReward = false;
+            if(loc instanceof City){
+                City city =(City) loc;
+                getsReward=city.demands(cargo);
+            }else if(loc instanceof Factory){
+                Factory factory = (Factory) loc;
+                getsReward = (factory.getInputCargo() == cargo);
+            }
+
+            if(getsReward){
+                int reward = delivered * cargo.getBaseValue();
+                company.addMoney(reward);
+            }
+        }else {
+            //Load
+            int space = v.getCapacity() - v.getCurrentAmount();
+            if (space > 0 && loc.getStock(cargo) > 0) {
+                int taken = loc.takeCargo(cargo, space);
+                if (taken > 0) {
+                    v.loadCargo(cargo, taken);
+                }
+            }
+        }
+    }
+
     public void moveVehicles(){
         for(Vehicle v : company.getOwnedVehicles()){
             Route route = v.getAssignedRoute();
@@ -60,25 +104,14 @@ public class GameEngine implements Serializable{
 
             if(v.isMovingForward()){
                 if(v.getCurrentPosition() == 0){//loading
-                    if(cargo!=null) {
-                        int space = v.getCapacity() - v.getCurrentAmount();
-                        int taken = source.takeCargo(cargo, space);
-                        if(taken>0){
-                            v.loadCargo(cargo,taken);
-                        }
-                    }
+                    handleEndpoint(v, source, cargo);
                 }
                 //moving
                 v.setCurrentPosition(v.getCurrentPosition()+v.getSpeed());
 
                 if(v.getCurrentPosition()>=distance){//unloading
-                    int delivered = v.unloadCargo();
-                    if(delivered>0 && cargo != null){
-                        dest.addCargo(cargo,delivered);
-                        int reward=delivered*cargo.getBaseValue();
-                        company.addMoney(reward);
-                    }
                     v.setCurrentPosition(distance);
+                    handleEndpoint(v, dest, cargo);
                     v.setMovingForward(false);
                 }
             }
@@ -95,7 +128,9 @@ public class GameEngine implements Serializable{
 
     public void nextTurn(){
         int maintenance = company.calculateTotalMaintenanceCost();
-        company.spendMoney(maintenance);
+        if (maintenance>0){
+            company.spendMoney(maintenance);
+        }
 
         moveVehicles();
 
