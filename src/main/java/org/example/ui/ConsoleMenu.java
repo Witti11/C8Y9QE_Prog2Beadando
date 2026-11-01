@@ -91,6 +91,7 @@ public class ConsoleMenu {
         System.out.println("2. Mentés betöltése");
         System.out.println("3. Tutorial");
         System.out.println("0. Kilépés");
+        System.out.println("Válaszd ki mit szeretnél csinálni!(0-3)");
         String choice = scanner.nextLine().trim();
         if (choice.equalsIgnoreCase("1") || choice.equalsIgnoreCase("2") || choice.equalsIgnoreCase("3") || choice.equalsIgnoreCase("0")) {
             return choice;
