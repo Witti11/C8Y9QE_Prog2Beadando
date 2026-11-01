@@ -486,14 +486,9 @@ public class ConsoleMenu {
         printVehicleStatus(v);
         System.out.println("Útvonalak:");
         for (Route r : engine.getRoutes()) {
-            if (r.isUnlocked() && r.getType() == v.getRequiredRouteType()) {
-                if(r.getAssignedCargo()!=null) {
-                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
-                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
-                }else {
-                    System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
-                            + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: Még nincs termék beállítva!");
-                }
+            if (r.isUnlocked() && r.getType() == v.getRequiredRouteType() && r.getAssignedCargo()!=null) {
+                System.out.println("[" + r.getId() + "] " + r.getSource().getDisplayName() + " -> " + r.getDestination().getDisplayName() + " ("
+                        + r.getType().getDisplayName() + "," + r.getDistance() + " km) - Termék: " + r.getAssignedCargo().getDisplayName());
             }
         }
         System.out.println("Melyik útvonalhoz szeretnéd adni a járművet?");

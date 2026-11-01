@@ -86,6 +86,9 @@ public class Route implements Serializable {
         if(!vehicle.canTravelOn(this.type)){
             throw new InvalidRouteException("A jármű (" + vehicle.getId() + ") nem közlekedhet ezen a pályatípuson (" + this.type.getDisplayName() + ")!");
         }
+        if(this.assignedCargo == null){
+            throw new InvalidRouteException("Az útvonalhoz ("+this.id+") még nincs hozzárendelve rakomány!");
+        }
         this.assignedVehicle.add(vehicle);
         vehicle.setAssignedRoute(this);
         return;
