@@ -128,7 +128,9 @@ public class GameEngine implements Serializable{
 
     public void nextTurn(){
         int maintenance = company.calculateTotalMaintenanceCost();
-        company.spendMoney(maintenance);
+        if (maintenance>0){
+            company.spendMoney(maintenance);
+        }
 
         moveVehicles();
 
