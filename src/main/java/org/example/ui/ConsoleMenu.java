@@ -621,7 +621,7 @@ public class ConsoleMenu {
         engine.addRoute(new Route("2", c1, pForest1, RouteType.ROAD, 4));//2
         engine.addRoute(new Route("3", pForest1, c2, RouteType.ROAD, 3));//3
         engine.addRoute(new Route("4",fBakery1, c1, RouteType.ROAD, 3));//4
-        engine.addRoute(new Route("5", fBakery1, pForest1, RouteType.ROAD, 5));//5
+        engine.addRoute(new Route("5", fBakery1, pForest1, RouteType.ROAD, 3));//5
         engine.addRoute(new Route("6", pForest1, fIKEA1, RouteType.ROAD, 3));//6
         engine.addRoute(new Route("7", fIKEA1, c2, RouteType.ROAD, 2));//7
         engine.addRoute(new Route("8", fBakery1, c3, RouteType.ROAD, 6));//8
@@ -630,16 +630,16 @@ public class ConsoleMenu {
         engine.addRoute(new Route("11", pFarm1, pMine1, RouteType.ROAD, 3));//11
         engine.addRoute(new Route("12", c3, pFarm1, RouteType.ROAD, 4));//12
         engine.addRoute(new Route("13", pFarm1, pForest2, RouteType.ROAD, 4));//13
-        engine.addRoute(new Route("14", pForest1, pMine1, RouteType.ROAD, 5));//14
+        engine.addRoute(new Route("14", pForest2, pMine1, RouteType.ROAD, 5));//14
         engine.addRoute(new Route("15", c3, pForest2, RouteType.ROAD, 4));//15
         engine.addRoute(new Route("16", fOIL1, c3, RouteType.ROAD, 2));//16
         engine.addRoute(new Route("17", c3, fIKEA2, RouteType.ROAD, 4));//17
-        engine.addRoute(new Route("18", pForest1, fIKEA2, RouteType.ROAD, 2));//18
+        engine.addRoute(new Route("18", pForest2, fIKEA2, RouteType.ROAD, 2));//18
         engine.addRoute(new Route("19", fIKEA2, c4, RouteType.ROAD, 5));//19
         engine.addRoute(new Route("20", fBakery2, c4, RouteType.ROAD, 2));//20
         engine.addRoute(new Route("21", pFarm2, fBakery2, RouteType.ROAD, 2));//21
         engine.addRoute(new Route("22", pOil1, fOIL1, RouteType.ROAD, 2));//22
-        engine.addRoute(new Route("23", c1, fOIL1, RouteType.ROAD, 15));//23
+        engine.addRoute(new Route("23", c1, fOIL1, RouteType.RAIL, 15));//23
         engine.addRoute(new Route("24", pMine1, fScrew1, RouteType.RAIL, 10));//24
         engine.addRoute(new Route("25", c2, c4, RouteType.RAIL, 10));//25
     }
