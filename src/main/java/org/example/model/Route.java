@@ -73,6 +73,11 @@ public class Route implements Serializable {
     }
 
     public void setAssignedCargo(CargoType assignedCargo) {
+        if(this.assignedCargo != assignedCargo){
+            for (Vehicle v:this.getAssignedVehicle()){
+                v.unloadCargo();
+            }
+        }
         this.assignedCargo = assignedCargo;
     }
 
@@ -89,6 +94,15 @@ public class Route implements Serializable {
         if(this.assignedCargo == null){
             throw new InvalidRouteException("Az útvonalhoz ("+this.id+") még nincs hozzárendelve rakomány!");
         }
+        if(vehicle.getAssignedRoute()==this){
+            throw new InvalidRouteException("Már ezen az úton van");
+        }
+        if(vehicle.getAssignedRoute()!=null){
+            vehicle.getAssignedRoute().removeVehicle(vehicle);
+        }
+        vehicle.unloadCargo();
+        vehicle.setMovingForward(true);
+        vehicle.setCurrentPosition(0);
         this.assignedVehicle.add(vehicle);
         vehicle.setAssignedRoute(this);
         return;
