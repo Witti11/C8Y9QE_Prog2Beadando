@@ -7,6 +7,8 @@ import org.example.persistence.SaveManager;
 
 
 import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -119,11 +121,8 @@ public class ConsoleMenu {
         System.out.println("0. Kilépés");
         System.out.println("Válaszd ki mit szeretnél csinálni!(0-3)");
         String choice = scanner.nextLine().trim();
-        if (choice.equalsIgnoreCase("1") || choice.equalsIgnoreCase("2") || choice.equalsIgnoreCase("3") || choice.equalsIgnoreCase("0")) {
-            return choice;
-        } else {
-            return gameMode();
-        }
+
+        return choice;
     }
 
     private void startNewGame() {
@@ -178,17 +177,19 @@ public class ConsoleMenu {
     }
 
     private void showTutorial() {
-        File file = new File("src/main/resources/tutorial.txt");
-        try (Scanner fileScanner = new Scanner(file)) {
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                System.out.println(line);
-            }
-        } catch (FileNotFoundException e) {
+        InputStream is = ConsoleMenu.class.getResourceAsStream("/tutorial.txt");
+        if (is == null) {
             System.out.println("Hiba: A tutorial.txt fájl nem található!");
+        } else {
+            try (Scanner fileScanner = new Scanner(is, StandardCharsets.UTF_8)) {
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    System.out.println(line);
+                }
+            }
+            System.out.println("\nNyomj Enter-t a folytatáshoz...");
+            scanner.nextLine();
         }
-        System.out.println("\nNyomj Enter-t a folytatáshoz...");
-        scanner.nextLine();
     }
 
     private void printMenu() {

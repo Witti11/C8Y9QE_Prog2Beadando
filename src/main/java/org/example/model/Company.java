@@ -38,6 +38,12 @@ public class Company implements Serializable {
         if (vehicle != null){
             this.ownedVehicles.add(vehicle);
         }
+        if(vehicle instanceof Truck){
+            nextTruckId++;
+        }
+        if (vehicle instanceof Train){
+            nextTrainId++;
+        }
     }
     public boolean sellVehicle(Vehicle vehicle){
         return this.ownedVehicles.remove(vehicle);
@@ -74,10 +80,10 @@ public class Company implements Serializable {
     }
 
     public String generateTruckId(){
-        return "K-"+(nextTruckId++);
+        return "K-"+(nextTruckId);
     }
     public String generateTrainId(){
-        return "V-"+(nextTrainId++);
+        return "V-"+(nextTrainId);
     }
 
 }

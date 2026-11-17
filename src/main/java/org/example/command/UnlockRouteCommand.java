@@ -16,6 +16,9 @@ public class UnlockRouteCommand implements Command{
     public void execute() {
         int cost = route.getType().getUnlockCost();
         try {
+            if (route.isUnlocked()){
+                route.unlock();
+            }
             company.spendMoney(cost);
             route.unlock();
             System.out.println(route.getId() + " útvonal sikeresen feloldva!");
