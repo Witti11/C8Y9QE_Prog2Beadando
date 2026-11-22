@@ -28,6 +28,7 @@ public class WebServer {
 
     private GameEngine engine;
     private boolean gameOver;
+    private boolean gameStarted;
     private Javalin app;
 
     public WebServer() {
@@ -40,6 +41,7 @@ public class WebServer {
         this.objectMapper = new ObjectMapper();
         this.engine = WebMapFactory.createNewGame("Mutyi Bt.");
         this.gameOver = false;
+        this.gameStarted = false;
     }
 
     public void start() {
@@ -344,6 +346,7 @@ public class WebServer {
             GameEngine loaded = saveManager.loadGame(saveName);
             this.engine = loaded;
             this.gameOver = false;
+            this.gameStarted = true;
 
             Map<String, Object> response = new LinkedHashMap<>();
             response.put("message", "Mentés sikeresen betöltve: " + saveName);
@@ -362,6 +365,7 @@ public class WebServer {
         synchronized (stateLock) {
             this.engine = WebMapFactory.createNewGame(companyName);
             this.gameOver = false;
+            this.gameStarted = true;
 
             Map<String, Object> response = new LinkedHashMap<>();
             response.put("message", "Új játék indítva: " + engine.getCompany().getCompanyName());
@@ -381,6 +385,7 @@ public class WebServer {
         state.put("unlockedRoutes", engine.numOfUnlockedRoutes());
         state.put("totalRoutes", engine.getRoutes().size());
         state.put("gameOver", gameOver);
+        state.put("gameStarted", gameStarted);
 
         // Locations
         List<Map<String, Object>> locationDtos = new ArrayList<>();

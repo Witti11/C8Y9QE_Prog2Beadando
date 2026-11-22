@@ -51,15 +51,15 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
-            gap: 12px;
+            padding: 0 14px;
+            gap: 10px;
             z-index: 20;
         }
 
         .hud-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             min-width: 0;
         }
 
@@ -75,7 +75,7 @@
         }
 
         .hud-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 800;
             letter-spacing: 0.06em;
             color: #fbbf24;
@@ -89,13 +89,13 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 180px;
+            max-width: 165px;
         }
 
         .hud-stats {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: nowrap;
         }
 
@@ -103,7 +103,7 @@
             background: rgba(30, 41, 59, 0.9);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 5px 10px;
+            padding: 5px 9px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -112,7 +112,7 @@
 
         .stat-label {
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.03em;
@@ -133,7 +133,7 @@
         .hud-actions {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         button {
@@ -153,8 +153,8 @@
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #ffffff;
             font-weight: 800;
-            font-size: 13px;
-            padding: 8px 16px;
+            font-size: 12.5px;
+            padding: 8px 14px;
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35);
             display: flex;
@@ -179,7 +179,7 @@
             border: 1px solid var(--border);
             font-size: 12px;
             font-weight: 600;
-            padding: 7px 10px;
+            padding: 7px 9px;
             border-radius: 7px;
             white-space: nowrap;
         }
@@ -187,6 +187,23 @@
         .btn-hud:hover:not(:disabled) {
             background: var(--bg-card-hover);
             border-color: var(--border-light);
+            color: #ffffff;
+        }
+
+        .btn-hud-accent {
+            background: rgba(56, 189, 248, 0.14);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 7px 10px;
+            border-radius: 7px;
+            white-space: nowrap;
+        }
+
+        .btn-hud-accent:hover:not(:disabled) {
+            background: rgba(56, 189, 248, 0.24);
+            border-color: #38bdf8;
             color: #ffffff;
         }
 
@@ -214,13 +231,19 @@
             width: 100%;
             height: 100%;
             display: block;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        #mapSvg.dragging {
+            cursor: grabbing;
         }
 
         .map-legend {
             position: absolute;
             bottom: 12px;
             left: 12px;
-            background: rgba(15, 23, 42, 0.88);
+            background: rgba(15, 23, 42, 0.9);
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 8px 12px;
@@ -258,7 +281,7 @@
             position: absolute;
             top: 10px;
             left: 12px;
-            background: rgba(15, 23, 42, 0.82);
+            background: rgba(15, 23, 42, 0.86);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 5px 10px;
@@ -266,6 +289,62 @@
             color: var(--text-muted);
             backdrop-filter: blur(4px);
             pointer-events: none;
+        }
+
+        /* Map Zoom & Pan Controls */
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+            z-index: 10;
+        }
+
+        .map-ctrl-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--border);
+            color: #e2e8f0;
+            font-size: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .map-ctrl-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-light);
+            color: #fbbf24;
+        }
+
+        .map-ctrl-zoom {
+            min-width: 52px;
+            height: 30px;
+            padding: 0 8px;
+            border-radius: 7px;
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid transparent;
+            color: #cbd5e1;
+            font-size: 11.5px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .map-ctrl-zoom:hover {
+            border-color: var(--border);
+            color: #ffffff;
         }
 
         /* SVG interactive elements */
@@ -276,7 +355,7 @@
         .route-hit {
             fill: none;
             stroke: transparent;
-            stroke-width: 22;
+            stroke-width: 28;
             stroke-linecap: round;
         }
 
@@ -381,20 +460,24 @@
             gap: 12px;
         }
 
-        .side-scroll::-webkit-scrollbar {
+        .side-scroll::-webkit-scrollbar,
+        .modal-body::-webkit-scrollbar {
             width: 7px;
         }
 
-        .side-scroll::-webkit-scrollbar-track {
+        .side-scroll::-webkit-scrollbar-track,
+        .modal-body::-webkit-scrollbar-track {
             background: #162033;
         }
 
-        .side-scroll::-webkit-scrollbar-thumb {
+        .side-scroll::-webkit-scrollbar-thumb,
+        .modal-body::-webkit-scrollbar-thumb {
             background: #334155;
             border-radius: 4px;
         }
 
-        .side-scroll::-webkit-scrollbar-thumb:hover {
+        .side-scroll::-webkit-scrollbar-thumb:hover,
+        .modal-body::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
 
@@ -774,6 +857,11 @@
             max-width: 680px;
         }
 
+        .modal.xl {
+            max-width: 1100px;
+            max-height: 90vh;
+        }
+
         .modal-header {
             padding: 14px 18px;
             background: #162033;
@@ -781,6 +869,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
         }
 
         .modal-title {
@@ -807,7 +896,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .modal-footer {
@@ -815,8 +904,13 @@
             background: #162033;
             border-top: 1px solid var(--border);
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             gap: 8px;
+        }
+
+        .modal-footer.right {
+            justify-content: flex-end;
         }
 
         .tutorial-pre {
@@ -857,6 +951,259 @@
             color: var(--text-muted);
             font-size: 13px;
         }
+
+        /* ===== FULL STATISTICS MODAL ===== */
+        .view-toggle {
+            display: inline-flex;
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .view-toggle-btn {
+            padding: 5px 11px;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        .view-toggle-btn.active {
+            background: var(--bg-card);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.35);
+        }
+
+        .stats-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .stats-kpi {
+            background: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .stats-kpi-label {
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .stats-kpi-val {
+            font-size: 16px;
+            font-weight: 800;
+            color: #f8fafc;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stats-section {
+            background: #162033;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .stats-section-title {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #fbbf24;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+
+        .stats-sub-title {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #cbd5e1;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stats-table-wrap {
+            overflow-x: auto;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .stats-table th {
+            text-align: left;
+            padding: 7px 9px;
+            background: rgba(15, 23, 42, 0.85);
+            color: var(--text-muted);
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .stats-table td {
+            padding: 7px 9px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.55);
+            color: #e2e8f0;
+            vertical-align: middle;
+        }
+
+        .stats-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .stats-table tbody tr:hover {
+            background: rgba(56, 189, 248, 0.06);
+        }
+
+        .stats-empty {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 12px;
+            padding: 6px 2px;
+        }
+
+        .stats-details summary {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 0;
+        }
+
+        .stats-details summary:hover {
+            color: #e2e8f0;
+        }
+
+        /* ===== START SCREEN / MAIN MENU OVERLAY ===== */
+        .start-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.84);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 65;
+            padding: 20px;
+        }
+
+        .start-overlay.open {
+            display: flex;
+        }
+
+        .start-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 30px 75px rgba(0, 0, 0, 0.78);
+            overflow: hidden;
+        }
+
+        .start-header {
+            padding: 24px 26px 18px;
+            background: linear-gradient(180deg, #162235 0%, #1e293b 100%);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .start-logo {
+            font-size: 40px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .start-title {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: #fbbf24;
+            margin-bottom: 6px;
+        }
+
+        .start-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .start-body {
+            padding: 20px 24px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 720px) {
+            .start-body {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .start-option-card {
+            background: #162033;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .start-option-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .start-saves-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 210px;
+            overflow-y: auto;
+            padding-right: 2px;
+        }
+
+        .start-footer {
+            padding: 13px 24px;
+            background: #162033;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 <body>
@@ -885,7 +1232,7 @@
             <span class="stat-val maint" id="hudMaint">-0 $/kör</span>
         </div>
         <div class="stat-badge">
-            <span class="stat-label">Feloldott utak</span>
+            <span class="stat-label">Utak</span>
             <span class="stat-val routes" id="hudRoutes">0 / 25</span>
         </div>
     </div>
@@ -894,6 +1241,7 @@
         <button class="btn-next-turn" id="btnNextTurn" onclick="handleNextTurn()">
             Következő kör <span>▶</span>
         </button>
+        <button class="btn-hud-accent" onclick="openStatsModal()">📊 Statisztika</button>
         <button class="btn-hud" onclick="openSaveModal()">💾 Mentés</button>
         <button class="btn-hud" onclick="openLoadModal()">📂 Betöltés</button>
         <button class="btn-hud" onclick="openNewGameModal()">✨ Új játék</button>
@@ -905,24 +1253,46 @@
 <main class="workspace">
     <!-- Center Interactive SVG Map -->
     <section class="map-pane">
-        <div class="map-hint">💡 Kattints bármelyik <b>útvonalra</b> vagy <b>állomásra</b> a térképen a részletekhez és műveletekhez!</div>
+        <div class="map-hint">💡 Kattints egy <b>útvonalra</b> vagy <b>állomásra</b> • <b>Egérgörgő:</b> nagyítás • <b>Bal egérgomb húzás:</b> mozgatás</div>
 
-        <svg id="mapSvg" viewBox="0 0 1920 1280" preserveAspectRatio="xMidYMid meet">
+        <div class="map-controls" aria-label="Térkép nagyítás és nézet">
+            <button class="map-ctrl-btn" onclick="zoomBy(1.25)" title="Nagyítás (+)">＋</button>
+            <button class="map-ctrl-zoom" id="zoomReadout" onclick="fitMapToViewport()" title="Visszaállítás teljes nézetre">100%</button>
+            <button class="map-ctrl-btn" onclick="zoomBy(1 / 1.25)" title="Kicsinyítés (-)">－</button>
+            <button class="map-ctrl-btn" onclick="fitMapToViewport()" title="Teljes térkép illesztése (0)">⌖</button>
+        </div>
+
+        <svg id="mapSvg" viewBox="0 0 3100 2160" preserveAspectRatio="xMidYMid meet">
             <defs>
-                <radialGradient id="bgGrad" cx="50%" cy="48%" r="65%">
-                    <stop offset="0%" stop-color="#1e293b"/>
-                    <stop offset="65%" stop-color="#131d31"/>
-                    <stop offset="100%" stop-color="#0b1120"/>
+                <radialGradient id="bgGrad" cx="50%" cy="48%" r="68%">
+                    <stop offset="0%" stop-color="#375f3e"/>
+                    <stop offset="55%" stop-color="#284a32"/>
+                    <stop offset="100%" stop-color="#1b3526"/>
                 </radialGradient>
+                <linearGradient id="cardProducer" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#0d6b4e"/>
+                    <stop offset="100%" stop-color="#053d2c"/>
+                </linearGradient>
+                <linearGradient id="cardFactory" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#a83b14"/>
+                    <stop offset="100%" stop-color="#5c1d0c"/>
+                </linearGradient>
+                <linearGradient id="cardCity" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#1e4bb8"/>
+                    <stop offset="100%" stop-color="#152866"/>
+                </linearGradient>
+                <clipPath id="mapBoundsClip">
+                    <rect x="20" y="20" width="3060" height="2120" rx="24"/>
+                </clipPath>
                 <filter id="glowAmber" x="-30%" y="-30%" width="160%" height="160%">
-                    <feGaussianBlur stdDeviation="7" result="blur"/>
+                    <feGaussianBlur stdDeviation="8" result="blur"/>
                     <feMerge>
                         <feMergeNode in="blur"/>
                         <feMergeNode in="SourceGraphic"/>
                     </feMerge>
                 </filter>
                 <filter id="glowBlue" x="-30%" y="-30%" width="160%" height="160%">
-                    <feGaussianBlur stdDeviation="8" result="blur"/>
+                    <feGaussianBlur stdDeviation="9" result="blur"/>
                     <feMerge>
                         <feMergeNode in="blur"/>
                         <feMergeNode in="SourceGraphic"/>
@@ -931,19 +1301,57 @@
                 <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="140%">
                     <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.55"/>
                 </filter>
-                <pattern id="gridPattern" width="80" height="80" patternUnits="userSpaceOnUse">
-                    <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(148,163,184,0.06)" stroke-width="1"/>
+                <pattern id="gridPattern" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1.2"/>
                 </pattern>
             </defs>
 
-            <!-- Background & subtle tactical terrain -->
+            <!-- Scenic topographic terrain background -->
             <g id="bgLayer">
-                <rect x="0" y="0" width="1920" height="1280" fill="url(#bgGrad)"/>
-                <rect x="0" y="0" width="1920" height="1280" fill="url(#gridPattern)"/>
-                <ellipse cx="760" cy="500" rx="380" ry="220" transform="rotate(11 760 500)" fill="rgba(16, 185, 129, 0.045)"/>
-                <ellipse cx="1520" cy="980" rx="320" ry="190" transform="rotate(-9 1520 980)" fill="rgba(16, 185, 129, 0.04)"/>
-                <ellipse cx="1180" cy="520" rx="220" ry="160" fill="rgba(56, 189, 248, 0.035)"/>
-                <rect x="14" y="14" width="1892" height="1252" rx="16" fill="none" stroke="rgba(71, 85, 105, 0.45)" stroke-width="2"/>
+                <rect x="-3500" y="-3500" width="10100" height="9160" fill="#102119"/>
+                <rect x="-3500" y="-3500" width="10100" height="9160" fill="url(#gridPattern)"/>
+                <g clip-path="url(#mapBoundsClip)">
+                    <!-- Base meadow gradient -->
+                    <rect x="20" y="20" width="3060" height="2120" fill="url(#bgGrad)"/>
+
+                    <!-- Biome terrain regions -->
+                    <!-- Sunlit farmland plains (center & south-east) -->
+                    <ellipse cx="1260" cy="880" rx="540" ry="310" transform="rotate(8 1260 880)" fill="rgba(124, 179, 86, 0.19)"/>
+                    <ellipse cx="2680" cy="1760" rx="520" ry="320" transform="rotate(-10 2680 1760)" fill="rgba(148, 184, 84, 0.2)"/>
+                    <!-- Deep woodlands (north & center-south) -->
+                    <ellipse cx="1220" cy="240" rx="560" ry="240" transform="rotate(-4 1220 240)" fill="rgba(22, 62, 38, 0.36)"/>
+                    <ellipse cx="1580" cy="1340" rx="440" ry="260" transform="rotate(6 1580 1340)" fill="rgba(22, 62, 38, 0.3)"/>
+                    <!-- Rocky iron highland ridge (east-center) -->
+                    <ellipse cx="2120" cy="880" rx="460" ry="300" transform="rotate(-14 2120 880)" fill="rgba(71, 85, 105, 0.28)"/>
+                    <!-- Warm arid oil basin (south-west) -->
+                    <ellipse cx="480" cy="1820" rx="490" ry="330" transform="rotate(12 480 1820)" fill="rgba(146, 114, 62, 0.24)"/>
+
+                    <!-- Topographic elevation contours -->
+                    <ellipse cx="1260" cy="880" rx="640" ry="380" transform="rotate(8 1260 880)" fill="none" stroke="rgba(220, 252, 231, 0.08)" stroke-width="2" stroke-dasharray="12 8"/>
+                    <ellipse cx="2120" cy="880" rx="340" ry="210" transform="rotate(-14 2120 880)" fill="none" stroke="rgba(226, 232, 240, 0.09)" stroke-width="2"/>
+                    <ellipse cx="2120" cy="880" rx="540" ry="360" transform="rotate(-14 2120 880)" fill="none" stroke="rgba(226, 232, 240, 0.06)" stroke-width="1.8" stroke-dasharray="10 10"/>
+                    <ellipse cx="480" cy="1820" rx="360" ry="230" transform="rotate(12 480 1820)" fill="none" stroke="rgba(254, 243, 199, 0.08)" stroke-width="1.8"/>
+                    <ellipse cx="2680" cy="1760" rx="380" ry="220" transform="rotate(-10 2680 1760)" fill="none" stroke="rgba(254, 243, 199, 0.08)" stroke-width="1.8"/>
+
+                    <!-- Scenic alpine lake (north-east) -->
+                    <path d="M 2510 410 C 2540 315, 2705 295, 2795 365 C 2875 430, 2860 545, 2745 585 C 2630 620, 2480 520, 2510 410 Z" fill="#1b4d68" stroke="rgba(163, 217, 165, 0.25)" stroke-width="12"/>
+                    <path d="M 2555 420 C 2580 355, 2690 340, 2755 390 C 2810 435, 2795 510, 2720 535 C 2640 560, 2535 495, 2555 420 Z" fill="#236a8e" opacity="0.72"/>
+                    <ellipse cx="2665" cy="455" rx="36" ry="20" transform="rotate(-12 2665 455)" fill="#3b6e43" stroke="#76a36b" stroke-width="3"/>
+
+                    <!-- Winding valley river -->
+                    <path d="M 10 530 C 260 545, 580 510, 740 760 C 900 1010, 1020 1120, 1180 1350 C 1340 1580, 1650 1525, 1875 1565 C 2090 1605, 2065 1890, 2165 2160" fill="none" stroke="rgba(15, 45, 38, 0.55)" stroke-width="62" stroke-linecap="round"/>
+                    <path d="M 10 530 C 260 545, 580 510, 740 760 C 900 1010, 1020 1120, 1180 1350 C 1340 1580, 1650 1525, 1875 1565 C 2090 1605, 2065 1890, 2165 2160" fill="none" stroke="#185270" stroke-width="44" stroke-linecap="round"/>
+                    <path d="M 10 530 C 260 545, 580 510, 740 760 C 900 1010, 1020 1120, 1180 1350 C 1340 1580, 1650 1525, 1875 1565 C 2090 1605, 2065 1890, 2165 2160" fill="none" stroke="#2478a3" stroke-width="24" stroke-linecap="round"/>
+                    <path d="M 10 530 C 260 545, 580 510, 740 760 C 900 1010, 1020 1120, 1180 1350 C 1340 1580, 1650 1525, 1875 1565 C 2090 1605, 2065 1890, 2165 2160" fill="none" stroke="rgba(186, 230, 253, 0.28)" stroke-width="6" stroke-dasharray="28 30" stroke-linecap="round"/>
+
+                    <!-- Procedural decorative trees, mountains, wheatfields, compass -->
+                    <g id="terrainDecorLayer"></g>
+
+                    <!-- Subtle strategic grid overlay -->
+                    <rect x="20" y="20" width="3060" height="2120" fill="url(#gridPattern)"/>
+                </g>
+                <!-- Outer map frame -->
+                <rect x="20" y="20" width="3060" height="2120" rx="24" fill="none" stroke="rgba(148, 197, 157, 0.35)" stroke-width="3"/>
             </g>
 
             <!-- Dynamic layers -->
@@ -955,7 +1363,7 @@
 
         <div class="map-legend">
             <div class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Termelő</div>
-            <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Gyár</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#f97316;"></span> Gyár</div>
             <div class="legend-item"><span class="legend-dot" style="background:#38bdf8;"></span> Város</div>
             <div class="legend-item"><span class="legend-line" style="background: repeating-linear-gradient(90deg,#64748b 0 5px,transparent 5px 9px);"></span> Zárolt út</div>
             <div class="legend-item"><span class="legend-line" style="background:#fbbf24;"></span> Közút (ROAD)</div>
@@ -983,6 +1391,79 @@
 <!-- ===== TOAST NOTIFICATIONS ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- ===== START SCREEN / MAIN MENU ===== -->
+<div class="start-overlay" id="startOverlay">
+    <div class="start-card">
+        <div class="start-header">
+            <div class="start-logo">🚛</div>
+            <div class="start-title">ÜDVÖZÖL A MUTYI TYCOON!</div>
+            <div class="start-subtitle">Válaszd ki, hogy új vállalatot alapítasz vagy egy korábbi mentést folytatsz.</div>
+        </div>
+
+        <div class="start-body">
+            <div class="start-option-card">
+                <div class="start-option-title">
+                    <span>✨ 1. Új játék</span>
+                    <span class="pill pill-green">2500 $</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 12px; line-height: 1.5;">
+                    Indíts új szállítmányozási céget az 1. körből, 16 állomással és 25 feloldható közúti/vasúti útvonallal.
+                </p>
+                <div style="margin-top:auto; display:flex; flex-direction:column; gap:8px;">
+                    <div class="section-heading" style="margin-bottom:0;">Vállalat neve</div>
+                    <input type="text" id="startCompanyNameInput" placeholder="pl. Mutyi Bt." value="Mutyi Bt." onkeydown="if(event.key==='Enter'){startNewGameFromMenu();}">
+                    <button class="btn-next-turn btn-full" style="justify-content:center;" onclick="startNewGameFromMenu()">
+                        🚀 Új játék indítása
+                    </button>
+                </div>
+            </div>
+
+            <div class="start-option-card">
+                <div class="start-option-title">
+                    <span>📂 2. Mentés betöltése</span>
+                    <button class="btn-hud" style="padding:3px 8px; font-size:11px;" onclick="loadStartScreenSaves()" title="Mentések frissítése">↻ Frissítés</button>
+                </div>
+                <div class="start-saves-list" id="startSavesList">
+                    <div style="color: var(--text-muted); font-size: 12px;">Mentések keresése...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="start-footer">
+            <span style="color: var(--text-muted); font-size: 12px;">Először játszol? Olvasd el a játékszabályokat!</span>
+            <button class="btn-hud-accent" onclick="openTutorialModal()">❓ 3. Tutorial / Útmutató</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MODAL: FULL STATISTICS ===== -->
+<div class="modal-backdrop" id="statsModal">
+    <div class="modal xl">
+        <div class="modal-header">
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <span class="modal-title">📊 Teljes vállalati statisztika</span>
+                <div class="view-toggle">
+                    <button class="view-toggle-btn active" id="statsBtnVisual" onclick="setStatsView('visual')">📋 Áttekintő táblázat</button>
+                    <button class="view-toggle-btn" id="statsBtnCli" onclick="setStatsView('cli')">🖥️ CLI szöveges nézet</button>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal('statsModal')">✕</button>
+        </div>
+        <div class="modal-body" id="statsModalBody">
+            Betöltés...
+        </div>
+        <div class="modal-footer">
+            <div style="font-size:11.5px; color:var(--text-muted);" id="statsFooterHint">
+                💡 Kattints bármelyik helyszínre vagy útvonalra a térképen való megtekintéshez!
+            </div>
+            <div style="display:flex; gap:8px;">
+                <button class="btn-hud" id="btnCopyCliStats" style="display:none;" onclick="copyCliStats()">📋 Szöveg másolása</button>
+                <button class="btn-primary" onclick="closeModal('statsModal')">Bezárás</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ===== MODAL: SAVE GAME ===== -->
 <div class="modal-backdrop" id="saveModal">
     <div class="modal">
@@ -997,7 +1478,7 @@
             </div>
             <div id="existingSavesForOverwrite"></div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer right">
             <button class="btn-hud" onclick="closeModal('saveModal')">Mégse</button>
             <button class="btn-primary" onclick="confirmSaveGame()">Mentés</button>
         </div>
@@ -1014,7 +1495,7 @@
         <div class="modal-body" id="loadModalBody">
             Betöltés...
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer right">
             <button class="btn-hud" onclick="closeModal('loadModal')">Bezárás</button>
         </div>
     </div>
@@ -1036,7 +1517,7 @@
                 <input type="text" id="newCompanyNameInput" placeholder="pl. Mutyi Bt." value="Mutyi Bt.">
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer right">
             <button class="btn-hud" onclick="closeModal('newGameModal')">Mégse</button>
             <button class="btn-primary" onclick="confirmNewGame()">Indítás</button>
         </div>
@@ -1053,7 +1534,7 @@
         <div class="modal-body">
             <pre class="tutorial-pre" id="tutorialContent">Betöltés...</pre>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer right">
             <button class="btn-primary" onclick="closeModal('tutorialModal')">Értem, vissza a játékhoz</button>
         </div>
     </div>
@@ -1067,7 +1548,7 @@
             <button class="modal-close" onclick="closeModal('gameOverModal')">✕</button>
         </div>
         <div class="modal-body" id="gameOverBody"></div>
-        <div class="modal-footer">
+        <div class="modal-footer right">
             <button class="btn-hud" onclick="closeModal('gameOverModal'); openLoadModal();">📂 Mentés betöltése</button>
             <button class="btn-primary" onclick="closeModal('gameOverModal'); openNewGameModal();">✨ Új játék indítása</button>
         </div>
@@ -1075,36 +1556,39 @@
 </div>
 
 <script>
-// ===== MAP TOPOLOGY & COORDINATES (from docs/mutyi_tycoon_t_rk_p_s_png_export_l.html) =====
+// ===== MAP TOPOLOGY & SPACIOUS COORDINATES (3100 x 2160 world, collision-free) =====
+const MAP_W = 3100;
+const MAP_H = 2160;
+
 const NODE_LAYOUT = {
     // Cities
-    'C_ERCFALVA':  { x: 330,  y: 245,  short: 'V1',        icon: '🏙️' },
-    'C_ZOLDHALOM': { x: 1180, y: 165,  short: 'V2',        icon: '🏙️' },
-    'C_KERESZTES': { x: 485,  y: 745,  short: 'V3',        icon: '🏙️' },
-    'C_MALOMMEZO': { x: 1345, y: 790,  short: 'V4',        icon: '🏙️' },
+    'C_ERCFALVA':  { x: 520,  y: 340,  short: 'V1',        icon: '🏙️' },
+    'C_ZOLDHALOM': { x: 2020, y: 220,  short: 'V2',        icon: '🏙️' },
+    'C_KERESZTES': { x: 820,  y: 1300, short: 'V3',        icon: '🏙️' },
+    'C_MALOMMEZO': { x: 2300, y: 1340, short: 'V4',        icon: '🏙️' },
     // Producers
-    'P_FOR_1':     { x: 755,  y: 215,  short: 'ERDŐ 1',    icon: '🌲' },
-    'P_FOR_2':     { x: 925,  y: 745,  short: 'ERDŐ 2',    icon: '🌲' },
-    'P_FAR_1':     { x: 750,  y: 515,  short: 'MEZŐ 1',    icon: '🌾' },
-    'P_FAR_2':     { x: 1715, y: 1055, short: 'MEZŐ 2',    icon: '🌾' },
-    'P_MIN_1':     { x: 1175, y: 525,  short: 'BÁNYA 1',   icon: '⛏️' },
-    'P_OIL_1':     { x: 350,  y: 1155, short: 'OLAJ 1',    icon: '🛢️' },
+    'P_FOR_1':     { x: 1260, y: 260,  short: 'ERDŐ 1',    icon: '🌲' },
+    'P_FOR_2':     { x: 1580, y: 1320, short: 'ERDŐ 2',    icon: '🌲' },
+    'P_FAR_1':     { x: 1320, y: 920,  short: 'MEZŐ 1',    icon: '🌾' },
+    'P_FAR_2':     { x: 2860, y: 1820, short: 'MEZŐ 2',    icon: '🌾' },
+    'P_MIN_1':     { x: 2020, y: 940,  short: 'BÁNYA 1',   icon: '⛏️' },
+    'P_OIL_1':     { x: 520,  y: 1980, short: 'OLAJ 1',    icon: '🛢️' },
     // Factories
-    'F_SCR_1':     { x: 165,  y: 430,  short: 'CSAVAR 1',  icon: '⚙️' },
-    'F_BAK_1':     { x: 525,  y: 400,  short: 'PÉK 1',     icon: '🥖' },
-    'F_BAK_2':     { x: 1415, y: 1055, short: 'PÉK 2',     icon: '🥖' },
-    'F_IKE_1':     { x: 1015, y: 345,  short: 'IKEA 1',    icon: '🪑' },
-    'F_IKE_2':     { x: 925,  y: 1005, short: 'IKEA 2',    icon: '🪑' },
-    'F_OIL_1':     { x: 365,  y: 955,  short: 'OL.FIN. 1', icon: '🏭' }
+    'F_SCR_1':     { x: 240,  y: 720,  short: 'CSAVAR 1',  icon: '⚙️' },
+    'F_BAK_1':     { x: 880,  y: 680,  short: 'PÉK 1',     icon: '🥖' },
+    'F_BAK_2':     { x: 2360, y: 1820, short: 'PÉK 2',     icon: '🥖' },
+    'F_IKE_1':     { x: 1740, y: 560,  short: 'IKEA 1',    icon: '🪑' },
+    'F_IKE_2':     { x: 1580, y: 1740, short: 'IKEA 2',    icon: '🪑' },
+    'F_OIL_1':     { x: 540,  y: 1640, short: 'OL.FIN. 1', icon: '🏭' }
 };
 
 const ROUTE_CURVES = {
-    '8':  { labelT: 0.45 },
-    '12': { labelT: 0.52 },
-    '13': { labelT: 0.55 },
-    '23': { cx: 295,  cy: 640, labelT: 0.55 },
-    '24': { cx: 660,  cy: 675, labelT: 0.45 },
-    '25': { cx: 1410, cy: 460, labelT: 0.50 }
+    '8':  { labelT: 0.40 },
+    '13': { labelT: 0.45 },
+    '14': { labelT: 0.55 },
+    '23': { cx: 320,  cy: 1050, labelT: 0.60 },
+    '24': { cx: 1100, cy: 1460, labelT: 0.73 },
+    '25': { cx: 2560, cy: 760,  labelT: 0.50 }
 };
 
 const CARGO_ICONS = {
@@ -1123,6 +1607,201 @@ let gameState = null;
 let activeTab = 'inspector'; // 'inspector' | 'fleet'
 let selection = null;        // { type: 'route' | 'location', id: string } | null
 let gameOverModalShown = false;
+let statsViewMode = 'visual'; // 'visual' | 'cli'
+
+// ===== MAP CAMERA (PAN & ZOOM) =====
+const MIN_ZOOM = 0.55;
+const MAX_ZOOM = 3.5;
+
+const cam = {
+    x: 0,
+    y: 0,
+    w: MAP_W,
+    h: MAP_H,
+    baseW: MAP_W,
+    baseH: MAP_H,
+    zoom: 1.0,
+    initialized: false
+};
+
+const dragState = {
+    active: false,
+    moved: false,
+    startX: 0,
+    startY: 0,
+    startCamX: 0,
+    startCamY: 0
+};
+
+let suppressNextClick = false;
+
+function computeBaseBox(rect) {
+    const pad = 45;
+    const worldW = MAP_W + pad * 2;
+    const worldH = MAP_H + pad * 2;
+    const aspect = (rect.width > 0 && rect.height > 0) ? (rect.width / rect.height) : (MAP_W / MAP_H);
+    const worldAspect = worldW / worldH;
+
+    if (aspect > worldAspect) {
+        return { baseW: worldH * aspect, baseH: worldH };
+    }
+    return { baseW: worldW, baseH: worldW / aspect };
+}
+
+function clampCamera() {
+    const marginX = MAP_W * 0.42;
+    const marginY = MAP_H * 0.42;
+    const minX = -marginX;
+    const maxX = MAP_W + marginX - cam.w;
+    const minY = -marginY;
+    const maxY = MAP_H + marginY - cam.h;
+
+    if (minX > maxX) {
+        cam.x = (MAP_W - cam.w) / 2;
+    } else {
+        cam.x = Math.max(minX, Math.min(maxX, cam.x));
+    }
+
+    if (minY > maxY) {
+        cam.y = (MAP_H - cam.h) / 2;
+    } else {
+        cam.y = Math.max(minY, Math.min(maxY, cam.y));
+    }
+}
+
+function applyCamera() {
+    const svg = document.getElementById('mapSvg');
+    if (!svg) return;
+    svg.setAttribute('viewBox', `${cam.x.toFixed(2)} ${cam.y.toFixed(2)} ${cam.w.toFixed(2)} ${cam.h.toFixed(2)}`);
+    const readout = document.getElementById('zoomReadout');
+    if (readout) {
+        readout.textContent = Math.round(cam.zoom * 100) + '%';
+    }
+}
+
+function fitMapToViewport() {
+    const svg = document.getElementById('mapSvg');
+    if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const { baseW, baseH } = computeBaseBox(rect);
+    cam.baseW = baseW;
+    cam.baseH = baseH;
+    cam.zoom = 1.0;
+    cam.w = baseW;
+    cam.h = baseH;
+    cam.x = (MAP_W - cam.w) / 2;
+    cam.y = (MAP_H - cam.h) / 2;
+    cam.initialized = true;
+    applyCamera();
+}
+
+function handleMapResize() {
+    const svg = document.getElementById('mapSvg');
+    if (!svg) return;
+    if (!cam.initialized) {
+        fitMapToViewport();
+        return;
+    }
+    const centerX = cam.x + cam.w / 2;
+    const centerY = cam.y + cam.h / 2;
+    const rect = svg.getBoundingClientRect();
+    const { baseW, baseH } = computeBaseBox(rect);
+    cam.baseW = baseW;
+    cam.baseH = baseH;
+    cam.w = cam.baseW / cam.zoom;
+    cam.h = cam.baseH / cam.zoom;
+    cam.x = centerX - cam.w / 2;
+    cam.y = centerY - cam.h / 2;
+    clampCamera();
+    applyCamera();
+}
+
+function zoomAtFraction(factor, relX, relY) {
+    const worldX = cam.x + relX * cam.w;
+    const worldY = cam.y + relY * cam.h;
+    const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, cam.zoom * factor));
+    cam.zoom = newZoom;
+    cam.w = cam.baseW / newZoom;
+    cam.h = cam.baseH / newZoom;
+    cam.x = worldX - relX * cam.w;
+    cam.y = worldY - relY * cam.h;
+    clampCamera();
+    applyCamera();
+}
+
+function zoomBy(factor) {
+    zoomAtFraction(factor, 0.5, 0.5);
+}
+
+function focusOnWorldPoint(wx, wy, minZoom = 1.35) {
+    if (cam.zoom < minZoom) {
+        cam.zoom = Math.min(MAX_ZOOM, minZoom);
+        cam.w = cam.baseW / cam.zoom;
+        cam.h = cam.baseH / cam.zoom;
+    }
+    cam.x = wx - cam.w / 2;
+    cam.y = wy - cam.h / 2;
+    clampCamera();
+    applyCamera();
+}
+
+function initMapInteraction() {
+    const svg = document.getElementById('mapSvg');
+    if (!svg) return;
+
+    svg.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const rect = svg.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        const relX = (e.clientX - rect.left) / rect.width;
+        const relY = (e.clientY - rect.top) / rect.height;
+        const factor = e.deltaY < 0 ? 1.16 : (1 / 1.16);
+        zoomAtFraction(factor, relX, relY);
+    }, { passive: false });
+
+    svg.addEventListener('mousedown', (e) => {
+        if (e.button !== 0 && e.button !== 1) return;
+        if (e.button === 1) e.preventDefault();
+        dragState.active = true;
+        dragState.moved = false;
+        dragState.startX = e.clientX;
+        dragState.startY = e.clientY;
+        dragState.startCamX = cam.x;
+        dragState.startCamY = cam.y;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!dragState.active) return;
+        const dx = e.clientX - dragState.startX;
+        const dy = e.clientY - dragState.startY;
+        if (!dragState.moved && Math.hypot(dx, dy) > 5) {
+            dragState.moved = true;
+            svg.classList.add('dragging');
+        }
+        if (dragState.moved) {
+            const rect = svg.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) {
+                cam.x = dragState.startCamX - (dx / rect.width) * cam.w;
+                cam.y = dragState.startCamY - (dy / rect.height) * cam.h;
+                clampCamera();
+                applyCamera();
+            }
+        }
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!dragState.active) return;
+        if (dragState.moved) {
+            suppressNextClick = true;
+            setTimeout(() => { suppressNextClick = false; }, 0);
+        }
+        dragState.active = false;
+        dragState.moved = false;
+        svg.classList.remove('dragging');
+    });
+
+    window.addEventListener('resize', handleMapResize);
+}
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -1213,6 +1892,16 @@ function applyState(state) {
     renderMap();
     renderSidePanel();
 
+    if (state.gameStarted === false) {
+        openStartScreen();
+    } else {
+        closeStartScreen();
+    }
+
+    if (document.getElementById('statsModal').classList.contains('open')) {
+        renderStatsModalContent();
+    }
+
     if (state.gameOver && !gameOverModalShown) {
         gameOverModalShown = true;
         openGameOverModal();
@@ -1262,7 +1951,10 @@ function renderRoutes() {
             class: 'route-group' + (isSelected ? ' selected' : ''),
             'data-route-id': r.id
         });
-        g.addEventListener('click', () => selectItem('route', r.id));
+        g.addEventListener('click', () => {
+            if (suppressNextClick) return;
+            selectItem('route', r.id);
+        });
 
         // Selection glow behind route
         const glowColor = !r.unlocked ? '#94a3b8' : (r.type === 'RAIL' ? '#818cf8' : '#fbbf24');
@@ -1270,22 +1962,29 @@ function renderRoutes() {
             d,
             class: 'route-glow',
             stroke: glowColor,
-            'stroke-width': 20,
+            'stroke-width': 24,
             'stroke-linecap': 'round',
             filter: r.type === 'RAIL' ? 'url(#glowBlue)' : 'url(#glowAmber)'
         }));
 
         if (!r.unlocked) {
-            // Locked route: faint dashed gray line
+            // Locked route: clearly readable dashed trail with subtle dark casing
+            g.appendChild(svgEl('path', {
+                d,
+                fill: 'none',
+                stroke: 'rgba(15, 23, 42, 0.52)',
+                'stroke-width': r.type === 'RAIL' ? 11 : 9,
+                'stroke-linecap': 'round'
+            }));
             g.appendChild(svgEl('path', {
                 d,
                 class: 'route-visual-main',
                 fill: 'none',
-                stroke: '#475569',
-                'stroke-width': r.type === 'RAIL' ? 6 : 5,
-                'stroke-dasharray': r.type === 'RAIL' ? '14 10' : '9 8',
+                stroke: '#cbd5e1',
+                'stroke-width': r.type === 'RAIL' ? 6.5 : 5.5,
+                'stroke-dasharray': r.type === 'RAIL' ? '16 12' : '11 9',
                 'stroke-linecap': 'round',
-                opacity: '0.68'
+                opacity: '0.76'
             }));
         } else if (r.type === 'ROAD') {
             // Unlocked ROAD: warm yellow/white solid line with dark casing
@@ -1293,7 +1992,7 @@ function renderRoutes() {
                 d,
                 fill: 'none',
                 stroke: '#1e293b',
-                'stroke-width': 13,
+                'stroke-width': 15,
                 'stroke-linecap': 'round'
             }));
             g.appendChild(svgEl('path', {
@@ -1301,15 +2000,15 @@ function renderRoutes() {
                 class: 'route-visual-main',
                 fill: 'none',
                 stroke: '#f59e0b',
-                'stroke-width': 8,
+                'stroke-width': 9,
                 'stroke-linecap': 'round'
             }));
             g.appendChild(svgEl('path', {
                 d,
                 fill: 'none',
                 stroke: '#fef3c7',
-                'stroke-width': 2.2,
-                'stroke-dasharray': '12 10',
+                'stroke-width': 2.5,
+                'stroke-dasharray': '14 12',
                 'stroke-linecap': 'round',
                 opacity: '0.9'
             }));
@@ -1319,34 +2018,34 @@ function renderRoutes() {
                 d,
                 fill: 'none',
                 stroke: '#1e1b4b',
-                'stroke-width': 15,
+                'stroke-width': 17,
                 'stroke-linecap': 'round'
             }));
             g.appendChild(svgEl('path', {
                 d,
                 fill: 'none',
                 stroke: '#4f46e5',
-                'stroke-width': 12,
-                'stroke-dasharray': '5 8'
+                'stroke-width': 13.5,
+                'stroke-dasharray': '6 9'
             }));
             g.appendChild(svgEl('path', {
                 d,
                 class: 'route-visual-main',
                 fill: 'none',
                 stroke: '#60a5fa',
-                'stroke-width': 5.5,
+                'stroke-width': 6,
                 'stroke-linecap': 'round'
             }));
             g.appendChild(svgEl('path', {
                 d,
                 fill: 'none',
                 stroke: '#e0e7ff',
-                'stroke-width': 1.8,
+                'stroke-width': 2,
                 'stroke-linecap': 'round'
             }));
         }
 
-        // Invisible wide hit zone (stroke-width >= 16)
+        // Invisible wide hit zone
         g.appendChild(svgEl('path', { d, class: 'route-hit' }));
         routesLayer.appendChild(g);
 
@@ -1359,23 +2058,26 @@ function renderRoutes() {
             transform: `translate(${mid.x}, ${mid.y})`,
             style: 'cursor: pointer;'
         });
-        bg.addEventListener('click', () => selectItem('route', r.id));
+        bg.addEventListener('click', () => {
+            if (suppressNextClick) return;
+            selectItem('route', r.id);
+        });
 
         if (!r.unlocked) {
             const labelText = `#${r.id} 🔒 ${r.unlockCost}$`;
-            const w = Math.max(76, labelText.length * 7.2 + 12);
+            const w = Math.max(88, labelText.length * 7.8 + 14);
             bg.appendChild(svgEl('rect', {
-                x: -w / 2, y: -13, width: w, height: 26, rx: 13,
-                fill: isSelected ? '#334155' : 'rgba(15, 23, 42, 0.92)',
+                x: -w / 2, y: -15, width: w, height: 30, rx: 15,
+                fill: isSelected ? '#334155' : 'rgba(15, 23, 42, 0.94)',
                 stroke: isSelected ? '#fbbf24' : '#475569',
-                'stroke-width': isSelected ? 2.5 : 1.5
+                'stroke-width': isSelected ? 2.8 : 1.6
             }));
             const txt = svgEl('text', {
                 x: 0, y: 1,
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
                 fill: '#cbd5e1',
-                'font-size': '11.5',
+                'font-size': '12.5',
                 'font-weight': '700'
             });
             txt.textContent = labelText;
@@ -1385,17 +2087,17 @@ function renderRoutes() {
             const icon = hasCargo ? (CARGO_ICONS[r.assignedCargo] || '📦') : '⚠️';
             const cargoLabel = hasCargo ? `${icon} ${r.assignedCargoName}` : '⚠️ Nincs áru';
             const fullText = `#${r.id} • ${cargoLabel}`;
-            const w = Math.max(106, fullText.length * 7.2 + 18);
+            const w = Math.max(118, fullText.length * 7.8 + 20);
 
             bg.appendChild(svgEl('rect', {
-                x: -w / 2, y: -15, width: w, height: 30, rx: 15,
+                x: -w / 2, y: -17, width: w, height: 34, rx: 17,
                 fill: hasCargo
                     ? (r.type === 'RAIL' ? '#1e1b4b' : '#1e293b')
-                    : 'rgba(120, 53, 15, 0.94)',
+                    : 'rgba(120, 53, 15, 0.95)',
                 stroke: isSelected
                     ? '#ffffff'
                     : (hasCargo ? (r.type === 'RAIL' ? '#818cf8' : '#fbbf24') : '#f59e0b'),
-                'stroke-width': isSelected ? 3 : 2,
+                'stroke-width': isSelected ? 3.2 : 2.2,
                 filter: 'url(#shadowSoft)'
             }));
 
@@ -1404,7 +2106,7 @@ function renderRoutes() {
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
                 fill: hasCargo ? '#f8fafc' : '#fef3c7',
-                'font-size': '12',
+                'font-size': '13',
                 'font-weight': '800'
             });
             txt.textContent = fullText;
@@ -1427,115 +2129,115 @@ function renderNodes() {
             class: 'node-group' + (isSelected ? ' selected' : ''),
             transform: `translate(${layout.x}, ${layout.y})`
         });
-        g.addEventListener('click', () => selectItem('location', loc.id));
+        g.addEventListener('click', () => {
+            if (suppressNextClick) return;
+            selectItem('location', loc.id);
+        });
 
-        // Colors by kind: Producer=Green, Factory=Orange, City=Blue
+        // Distinct high-contrast color palettes by kind:
+        // Producer = Rich Emerald Green | Factory = Warm Burnt Orange | City = Royal Electric Blue
+        let cardFill = 'url(#cardCity)';
         let accent = '#38bdf8';
-        let accentDark = '#0369a1';
-        let badgeBg = 'rgba(56, 189, 248, 0.2)';
+        let badgeBg = '#0c234a';
+        let badgeStroke = '#38bdf8';
+        let emblemFill = '#0284c7';
+        let emblemStroke = '#e0f2fe';
         let stockText = '';
 
         if (loc.kind === 'PRODUCER') {
-            accent = '#10b981';
-            accentDark = '#065f46';
-            badgeBg = 'rgba(16, 185, 129, 0.2)';
+            cardFill = 'url(#cardProducer)';
+            accent = '#34d399';
+            badgeBg = '#022c22';
+            badgeStroke = '#34d399';
+            emblemFill = '#10b981';
+            emblemStroke = '#d1fae5';
             const icon = CARGO_ICONS[loc.outputCargo] || '📦';
             stockText = `${icon} ${loc.outputStock} db (+${loc.productionRate})`;
         } else if (loc.kind === 'FACTORY') {
-            accent = '#f59e0b';
-            accentDark = '#92400e';
-            badgeBg = 'rgba(245, 158, 11, 0.2)';
+            cardFill = 'url(#cardFactory)';
+            accent = '#fb923c';
+            badgeBg = '#3b1106';
+            badgeStroke = '#fb923c';
+            emblemFill = '#ea580c';
+            emblemStroke = '#ffedd5';
             const inIcon = CARGO_ICONS[loc.inputCargo] || '';
             const outIcon = CARGO_ICONS[loc.outputCargo] || '';
             stockText = `${inIcon}${loc.inputStock} ➔ ${outIcon}${loc.outputStock}`;
         } else if (loc.kind === 'CITY') {
+            cardFill = 'url(#cardCity)';
             accent = '#38bdf8';
-            accentDark = '#075985';
-            badgeBg = 'rgba(56, 189, 248, 0.2)';
+            badgeBg = '#0c1f4a';
+            badgeStroke = '#38bdf8';
+            emblemFill = '#0284c7';
+            emblemStroke = '#e0f2fe';
             const demandIcons = (loc.demands || []).map(d => CARGO_ICONS[d.cargo] || '').join('');
             stockText = `${demandIcons} ✔ ${loc.totalFulfilled}`;
         }
 
+        // Dynamic card sizing so larger display names fit comfortably
+        const cardW = Math.max(224, Math.round(loc.displayName.length * 10.6 + 26));
+        const cardH = 74;
+
         // Glow ring when selected
         g.appendChild(svgEl('rect', {
             class: 'node-select-ring',
-            x: -104, y: -56, width: 208, height: 112, rx: 16,
+            x: -cardW / 2 - 8, y: -64, width: cardW + 16, height: 134, rx: 18,
             fill: 'none',
             stroke: '#ffffff',
-            'stroke-width': 4,
+            'stroke-width': 4.5,
             filter: 'url(#glowBlue)'
         }));
 
-        // Main compact dark node card
-        const cardW = 196;
-        const cardH = 60;
+        // Main color-coded node card
         g.appendChild(svgEl('rect', {
             class: 'node-card-bg',
-            x: -cardW / 2, y: -12, width: cardW, height: cardH, rx: 11,
-            fill: '#1e293b',
+            x: -cardW / 2, y: -12, width: cardW, height: cardH, rx: 12,
+            fill: cardFill,
             stroke: isSelected ? '#ffffff' : accent,
-            'stroke-width': isSelected ? 3.5 : 2.6,
+            'stroke-width': isSelected ? 3.8 : 2.8,
             filter: 'url(#shadowSoft)'
         }));
 
         // Icon emblem above card
         if (loc.kind === 'CITY') {
             g.appendChild(svgEl('polygon', {
-                points: '0,-58 -29,-12 29,-12',
-                fill: accent,
-                stroke: '#e0f2fe',
+                points: '0,-62 -31,-12 31,-12',
+                fill: emblemFill,
+                stroke: emblemStroke,
                 'stroke-width': 2.5
             }));
         } else if (loc.kind === 'PRODUCER') {
             g.appendChild(svgEl('circle', {
-                cx: 0, cy: -34, r: 23,
-                fill: accent,
-                stroke: '#d1fae5',
+                cx: 0, cy: -36, r: 24,
+                fill: emblemFill,
+                stroke: emblemStroke,
                 'stroke-width': 2.5
             }));
         } else {
             g.appendChild(svgEl('rect', {
-                x: -23, y: -56, width: 46, height: 42, rx: 9,
-                fill: accent,
-                stroke: '#fef3c7',
+                x: -24, y: -59, width: 48, height: 44, rx: 10,
+                fill: emblemFill,
+                stroke: emblemStroke,
                 'stroke-width': 2.5
             }));
         }
 
         const iconTxt = svgEl('text', {
-            x: 0, y: loc.kind === 'CITY' ? -28 : -33,
+            x: 0, y: loc.kind === 'CITY' ? -29 : -35,
             'text-anchor': 'middle',
             'dominant-baseline': 'middle',
-            'font-size': '21'
+            'font-size': '22'
         });
         iconTxt.textContent = layout.icon;
         g.appendChild(iconTxt);
 
-        // Short code chip top-right of emblem
-        g.appendChild(svgEl('rect', {
-            x: 22, y: -52, width: 62, height: 19, rx: 6,
-            fill: '#0f172a',
-            stroke: accent,
-            'stroke-width': 1.2
-        }));
-        const shortTxt = svgEl('text', {
-            x: 53, y: -42,
-            'text-anchor': 'middle',
-            'dominant-baseline': 'middle',
-            fill: '#e2e8f0',
-            'font-size': '10',
-            'font-weight': '800'
-        });
-        shortTxt.textContent = layout.short;
-        g.appendChild(shortTxt);
-
         // Display name
         const nameTxt = svgEl('text', {
-            x: 0, y: 7,
+            x: 0, y: 11,
             'text-anchor': 'middle',
             'dominant-baseline': 'middle',
             fill: '#f8fafc',
-            'font-size': '13.5',
+            'font-size': '18',
             'font-weight': '800'
         });
         nameTxt.textContent = loc.displayName;
@@ -1543,17 +2245,17 @@ function renderNodes() {
 
         // Compact live inventory / status pill
         g.appendChild(svgEl('rect', {
-            x: -cardW / 2 + 8, y: 20, width: cardW - 16, height: 22, rx: 6,
+            x: -cardW / 2 + 12, y: 29, width: cardW - 24, height: 25, rx: 7,
             fill: badgeBg,
-            stroke: accentDark,
-            'stroke-width': 1
+            stroke: badgeStroke,
+            'stroke-width': 1.2
         }));
         const stockTxt = svgEl('text', {
-            x: 0, y: 31.5,
+            x: 0, y: 41.8,
             'text-anchor': 'middle',
             'dominant-baseline': 'middle',
             fill: '#f8fafc',
-            'font-size': '12',
+            'font-size': '13.5',
             'font-weight': '700'
         });
         stockTxt.textContent = stockText;
@@ -1591,7 +2293,7 @@ function renderVehicles() {
             const norm = getRouteNormal(route, t);
 
             // Spread vehicles slightly if multiple share a route
-            const offsetStep = list.length > 1 ? (idx - (list.length - 1) / 2) * 26 : 0;
+            const offsetStep = list.length > 1 ? (idx - (list.length - 1) / 2) * 32 : 0;
             const vx = pt.x + norm.nx * offsetStep;
             const vy = pt.y + norm.ny * offsetStep;
 
@@ -1610,6 +2312,7 @@ function renderVehicles() {
 
             marker.onclick = (e) => {
                 e.stopPropagation();
+                if (suppressNextClick) return;
                 selectItem('route', routeId);
             };
 
@@ -1623,10 +2326,10 @@ function renderVehicles() {
 
             // Marker circle
             marker.appendChild(svgEl('circle', {
-                cx: 0, cy: 0, r: 19,
+                cx: 0, cy: 0, r: 21,
                 fill: isTrain ? '#4f46e5' : '#059669',
                 stroke: '#ffffff',
-                'stroke-width': 2.5,
+                'stroke-width': 2.6,
                 filter: 'url(#shadowSoft)'
             }));
 
@@ -1634,26 +2337,26 @@ function renderVehicles() {
                 x: 0, y: 1,
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
-                'font-size': '18'
+                'font-size': '19'
             });
             vIcon.textContent = isTrain ? '🚂' : '🚛';
             marker.appendChild(vIcon);
 
             // Compact ID + direction + cargo pill above vehicle
             const pillText = `${v.id} ${dirArrow} ${cargoBadge}`;
-            const pw = Math.max(74, pillText.length * 6.8 + 12);
+            const pw = Math.max(80, pillText.length * 7.2 + 14);
             marker.appendChild(svgEl('rect', {
-                x: -pw / 2, y: -38, width: pw, height: 19, rx: 9,
+                x: -pw / 2, y: -42, width: pw, height: 21, rx: 10,
                 fill: '#0f172a',
                 stroke: isTrain ? '#818cf8' : '#34d399',
-                'stroke-width': 1.5
+                'stroke-width': 1.6
             }));
             const pTxt = svgEl('text', {
-                x: 0, y: -28,
+                x: 0, y: -31,
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
                 fill: '#f8fafc',
-                'font-size': '10.5',
+                'font-size': '11',
                 'font-weight': '800'
             });
             pTxt.textContent = pillText;
@@ -1677,6 +2380,22 @@ function selectItem(type, id) {
     updateTabButtons();
     renderMap();
     renderSidePanel();
+}
+
+function jumpToItemOnMap(type, id) {
+    closeModal('statsModal');
+    selectItem(type, id);
+    if (type === 'location') {
+        const layout = NODE_LAYOUT[id];
+        if (layout) focusOnWorldPoint(layout.x, layout.y, 1.35);
+    } else if (type === 'route' && gameState) {
+        const route = gameState.routes.find(r => r.id === id);
+        if (route) {
+            const curve = ROUTE_CURVES[route.id];
+            const mid = getRoutePoint(route, (curve && curve.labelT) ? curve.labelT : 0.5);
+            focusOnWorldPoint(mid.x, mid.y, 1.35);
+        }
+    }
 }
 
 function switchTab(tab) {
@@ -2100,6 +2819,410 @@ function renderFleetAndShopHtml() {
     `;
 }
 
+// ===== FULL STATISTICS MODAL (ALL AT ONCE, LIKE CLI) =====
+function openStatsModal() {
+    if (!gameState) return;
+    renderStatsModalContent();
+    openModal('statsModal');
+}
+
+function setStatsView(mode) {
+    statsViewMode = mode;
+    document.getElementById('statsBtnVisual').classList.toggle('active', mode === 'visual');
+    document.getElementById('statsBtnCli').classList.toggle('active', mode === 'cli');
+    document.getElementById('btnCopyCliStats').style.display = mode === 'cli' ? 'inline-block' : 'none';
+    document.getElementById('statsFooterHint').style.visibility = mode === 'visual' ? 'visible' : 'hidden';
+    renderStatsModalContent();
+}
+
+function renderStatsModalContent() {
+    if (!gameState) return;
+    const body = document.getElementById('statsModalBody');
+    document.getElementById('statsBtnVisual').classList.toggle('active', statsViewMode === 'visual');
+    document.getElementById('statsBtnCli').classList.toggle('active', statsViewMode === 'cli');
+    document.getElementById('btnCopyCliStats').style.display = statsViewMode === 'cli' ? 'inline-block' : 'none';
+    document.getElementById('statsFooterHint').style.visibility = statsViewMode === 'visual' ? 'visible' : 'hidden';
+
+    if (statsViewMode === 'cli') {
+        body.innerHTML = `<pre class="tutorial-pre" id="cliStatsPre">${escapeHtml(buildCliStatisticsText(gameState))}</pre>`;
+        return;
+    }
+
+    const producers = gameState.locations.filter(l => l.kind === 'PRODUCER');
+    const factories = gameState.locations.filter(l => l.kind === 'FACTORY');
+    const cities = gameState.locations.filter(l => l.kind === 'CITY');
+    const trucks = gameState.vehicles.filter(v => v.kind === 'TRUCK');
+    const trains = gameState.vehicles.filter(v => v.kind === 'TRAIN');
+    const unlockedRoutes = gameState.routes.filter(r => r.unlocked);
+    const lockedRoutes = gameState.routes.filter(r => !r.unlocked);
+    const vehicleById = new Map(gameState.vehicles.map(v => [v.id, v]));
+    const routeById = new Map(gameState.routes.map(r => [r.id, r]));
+    const totalFulfilled = cities.reduce((sum, c) => sum + (c.totalFulfilled || 0), 0);
+
+    // 1. Producers table
+    const producerRows = producers.map(p => `
+        <tr>
+            <td><span class="clickable-link" onclick="jumpToItemOnMap('location','${escapeHtml(p.id)}')">${escapeHtml(p.displayName)}</span></td>
+            <td>${CARGO_ICONS[p.outputCargo] || ''} ${escapeHtml(p.outputCargoName)}</td>
+            <td><b>${p.outputStock} db</b></td>
+            <td style="color:#34d399; font-weight:700;">+${p.productionRate} / kör</td>
+        </tr>
+    `).join('');
+
+    // 2. Factories table
+    const factoryRows = factories.map(f => `
+        <tr>
+            <td><span class="clickable-link" onclick="jumpToItemOnMap('location','${escapeHtml(f.id)}')">${escapeHtml(f.displayName)}</span></td>
+            <td>${CARGO_ICONS[f.inputCargo] || ''} ${escapeHtml(f.inputCargoName)}: <b>${f.inputStock} db</b></td>
+            <td>${CARGO_ICONS[f.outputCargo] || ''} ${escapeHtml(f.outputCargoName)}: <b>${f.outputStock} db</b></td>
+            <td style="color:#fbbf24; font-weight:700;">+${f.processingRate} / kör</td>
+        </tr>
+    `).join('');
+
+    // 3. Cities table
+    const cityRows = cities.map(c => {
+        const demandsHtml = (c.demands || []).map(d =>
+            `<span class="pill pill-blue" style="margin:2px 4px 2px 0;">${CARGO_ICONS[d.cargo] || ''} ${escapeHtml(d.displayName)} <b>(Teljesítve: ${d.fulfilled} db)</b></span>`
+        ).join('');
+        return `
+            <tr>
+                <td><span class="clickable-link" onclick="jumpToItemOnMap('location','${escapeHtml(c.id)}')">${escapeHtml(c.displayName)}</span></td>
+                <td>${demandsHtml}</td>
+                <td><span class="pill pill-green">${c.totalFulfilled || 0} db</span></td>
+            </tr>
+        `;
+    }).join('');
+
+    // 4. Vehicle table helper
+    const buildVehicleTable = (list, emptyText) => {
+        if (list.length === 0) {
+            return `<div class="stats-empty">${emptyText}</div>`;
+        }
+        const rows = list.map(v => {
+            const route = v.assignedRouteId ? routeById.get(v.assignedRouteId) : null;
+            const routeCell = route
+                ? `<span class="clickable-link" onclick="jumpToItemOnMap('route','${escapeHtml(route.id)}')">Útvonal #${escapeHtml(route.id)}</span> <span style="color:var(--text-muted);">(${escapeHtml(route.sourceName)} ➔ ${escapeHtml(route.destinationName)})</span>`
+                : '<span style="color:#fbbf24;">Garázsban áll</span>';
+            const cargoCell = v.currentAmount > 0
+                ? `${CARGO_ICONS[v.currentCargo] || ''} ${escapeHtml(v.currentCargoName)} (${v.currentAmount}/${v.capacity} db)`
+                : `Üres (0/${v.capacity} db)`;
+            const posCell = route
+                ? `${v.currentPosition.toFixed(1)} / ${route.distance} km (${v.movingForward ? 'Oda ➔' : '⬅ Vissza'})`
+                : '–';
+            return `
+                <tr>
+                    <td><b>[${escapeHtml(v.id)}]</b></td>
+                    <td><span class="pill ${v.kind === 'TRAIN' ? 'pill-indigo' : 'pill-amber'}">${escapeHtml(v.versionName)}</span></td>
+                    <td>${routeCell}</td>
+                    <td>${v.speed} km/kör</td>
+                    <td style="color:#fb923c;">${v.maintenanceCost} $/kör</td>
+                    <td>${v.capacity} db</td>
+                    <td>${cargoCell}</td>
+                    <td style="color:var(--text-muted);">${posCell}</td>
+                </tr>
+            `;
+        }).join('');
+        return `
+            <div class="stats-table-wrap">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Azonosító</th>
+                            <th>Típus</th>
+                            <th>Állapot / Útvonal</th>
+                            <th>Sebesség</th>
+                            <th>Fenntartás</th>
+                            <th>Kapacitás</th>
+                            <th>Rakomány</th>
+                            <th>Pozíció</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>
+        `;
+    };
+
+    // 5. Unlocked Routes table
+    let unlockedRoutesHtml = '';
+    if (unlockedRoutes.length === 0) {
+        unlockedRoutesHtml = '<div class="stats-empty">Még nincs feloldott útvonalad!</div>';
+    } else {
+        const rows = unlockedRoutes.map(r => {
+            const typeBadge = r.type === 'RAIL'
+                ? '<span class="pill pill-indigo">🚂 Vasút</span>'
+                : '<span class="pill pill-amber">🛣️ Közút</span>';
+            const cargoCell = r.assignedCargo
+                ? `<span class="pill pill-green">${CARGO_ICONS[r.assignedCargo] || ''} ${escapeHtml(r.assignedCargoName)}</span>`
+                : '<span class="pill pill-red">Még nincs termék beállítva!</span>';
+            const vIds = r.assignedVehicleIds || [];
+            const vehiclesCell = vIds.length === 0
+                ? '<span style="color:var(--text-muted); font-style:italic;">Még nincsenek járművek az útvonalon.</span>'
+                : vIds.map(vid => {
+                    const v = vehicleById.get(vid);
+                    const ver = v ? ` (${escapeHtml(v.versionName)})` : '';
+                    return `<span class="pill pill-slate" style="margin:2px 4px 2px 0;">*${escapeHtml(vid)}${ver}</span>`;
+                }).join('');
+            return `
+                <tr>
+                    <td><span class="clickable-link" onclick="jumpToItemOnMap('route','${escapeHtml(r.id)}')">#${escapeHtml(r.id)}</span></td>
+                    <td><b>${escapeHtml(r.sourceName)}</b> <span style="color:#fbbf24;">➔</span> <b>${escapeHtml(r.destinationName)}</b></td>
+                    <td>${typeBadge}</td>
+                    <td>${r.distance} km</td>
+                    <td>${cargoCell}</td>
+                    <td>${vehiclesCell}</td>
+                </tr>
+            `;
+        }).join('');
+        unlockedRoutesHtml = `
+            <div class="stats-table-wrap">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Útvonal</th>
+                            <th>Típus</th>
+                            <th>Távolság</th>
+                            <th>Termék</th>
+                            <th>Járművek</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    // 6. Collapsible locked routes reference
+    const lockedRows = lockedRoutes.map(r => `
+        <tr>
+            <td><span class="clickable-link" onclick="jumpToItemOnMap('route','${escapeHtml(r.id)}')">#${escapeHtml(r.id)}</span></td>
+            <td>${escapeHtml(r.sourceName)} ➔ ${escapeHtml(r.destinationName)}</td>
+            <td>${r.type === 'RAIL' ? '🚂 Vasút' : '🛣️ Közút'}</td>
+            <td>${r.distance} km</td>
+            <td>${r.unlockCost} $</td>
+        </tr>
+    `).join('');
+
+    body.innerHTML = `
+        <div class="stats-kpi-grid">
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Vállalat</div>
+                <div class="stats-kpi-val" style="color:#fbbf24;">${escapeHtml(gameState.companyName)}</div>
+            </div>
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Aktuális kör</div>
+                <div class="stats-kpi-val">#${gameState.currentTurn}</div>
+            </div>
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Egyenleg</div>
+                <div class="stats-kpi-val" style="color:#34d399;">${gameState.money.toLocaleString('hu-HU')} $</div>
+            </div>
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Fenntartási költség</div>
+                <div class="stats-kpi-val" style="color:#fb923c;">-${gameState.maintenanceCost} $/kör</div>
+            </div>
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Feloldott útvonalak</div>
+                <div class="stats-kpi-val" style="color:#38bdf8;">${gameState.unlockedRoutes} / ${gameState.totalRoutes}</div>
+            </div>
+            <div class="stats-kpi">
+                <div class="stats-kpi-label">Flotta / Leszállítva</div>
+                <div class="stats-kpi-val">${gameState.vehicles.length} jármű • ${totalFulfilled} db</div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-section-title">
+                <span>📍 Helyszínek (${gameState.locations.length})</span>
+                <span style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:none;">${producers.length} termelő • ${factories.length} gyár • ${cities.length} város</span>
+            </div>
+
+            <div class="stats-sub-title"><span class="pill pill-green">⛏️ Termelők</span></div>
+            <div class="stats-table-wrap">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Helyszín</th>
+                            <th>Termék</th>
+                            <th>Raktáron</th>
+                            <th>Termelés</th>
+                        </tr>
+                    </thead>
+                    <tbody>${producerRows}</tbody>
+                </table>
+            </div>
+
+            <div class="stats-sub-title"><span class="pill pill-amber">🏭 Gyárak</span></div>
+            <div class="stats-table-wrap">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Helyszín</th>
+                            <th>Alapanyag raktár</th>
+                            <th>Késztermék raktár</th>
+                            <th>Feldolgozás</th>
+                        </tr>
+                    </thead>
+                    <tbody>${factoryRows}</tbody>
+                </table>
+            </div>
+
+            <div class="stats-sub-title"><span class="pill pill-blue">🏙️ Városok</span></div>
+            <div class="stats-table-wrap">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Város</th>
+                            <th>Igények és teljesítés</th>
+                            <th>Összesen</th>
+                        </tr>
+                    </thead>
+                    <tbody>${cityRows}</tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-section-title">
+                <span>🚛 Járműflotta (${gameState.vehicles.length})</span>
+                <span style="font-size:11px; color:var(--text-muted); font-weight:600; text-transform:none;">${trucks.length} kamion • ${trains.length} vonat</span>
+            </div>
+
+            <div class="stats-sub-title"><span class="pill pill-amber">🚛 Kamionok (${trucks.length})</span></div>
+            ${buildVehicleTable(trucks, 'Még nincs saját kamionod.')}
+
+            <div class="stats-sub-title" style="margin-top:6px;"><span class="pill pill-indigo">🚂 Vonatok (${trains.length})</span></div>
+            ${buildVehicleTable(trains, 'Még nincs saját vonatod.')}
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-section-title">
+                <span>🛣️ Feloldott útvonalak (${unlockedRoutes.length} / ${gameState.totalRoutes})</span>
+            </div>
+            ${unlockedRoutesHtml}
+
+            ${lockedRoutes.length > 0 ? `
+                <details class="stats-details">
+                    <summary>🔒 Zárolt útvonalak megtekintése (${lockedRoutes.length} db)</summary>
+                    <div class="stats-table-wrap" style="margin-top:8px;">
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Útvonal</th>
+                                    <th>Típus</th>
+                                    <th>Távolság</th>
+                                    <th>Feloldási díj</th>
+                                </tr>
+                            </thead>
+                            <tbody>${lockedRows}</tbody>
+                        </table>
+                    </div>
+                </details>
+            ` : ''}
+        </div>
+    `;
+}
+
+// Mirrors ConsoleMenu.showStatistics() output formatting faithfully
+function buildCliStatisticsText(state) {
+    const lines = [];
+    const sep = '===================================';
+    const vehicleById = new Map(state.vehicles.map(v => [v.id, v]));
+
+    lines.push(sep);
+    lines.push(`* ${state.companyName} * | Kör: ${state.currentTurn} | Egyenleg: ${state.money}$ | Fenntartási költség: ${state.maintenanceCost}$/kör`);
+    lines.push(sep);
+    lines.push('STATISZTIKÁK');
+    lines.push(sep);
+    lines.push(sep);
+    lines.push('--- HELYSZÍNEK ---');
+    lines.push(sep);
+
+    for (const loc of state.locations) {
+        if (loc.kind === 'PRODUCER') {
+            lines.push(`TERMELŐ ${loc.displayName} -> | Termék: ${loc.outputCargoName} | Raktáron: ${loc.outputStock} db ( + ${loc.productionRate}/kör)`);
+        } else if (loc.kind === 'FACTORY') {
+            lines.push(`GYÁR ${loc.displayName} -> | Alapanyag (${loc.inputCargoName}): ${loc.inputStock} db | Késztermék (${loc.outputCargoName}): ${loc.outputStock} db ( + ${loc.processingRate} /kör)`);
+        } else if (loc.kind === 'CITY') {
+            lines.push(`VÁROS ${loc.displayName} -> | Igények: `);
+            for (const d of (loc.demands || [])) {
+                lines.push(`\t${d.displayName} (Teljesítve: ${d.fulfilled} db)`);
+            }
+        }
+    }
+
+    const formatVehicleLine = (v) => {
+        const routeText = v.assignedRouteId ? `Útvonal: ${v.assignedRouteId}` : 'Garázsban áll';
+        return `[${v.id}] ${routeText} | Típus: ${v.versionName} | Sebesség: ${v.speed} km/kör | Fenntartási költség: ${v.maintenanceCost}$/kör | Kapacitás: ${v.capacity} db`;
+    };
+
+    const trucks = state.vehicles.filter(v => v.kind === 'TRUCK');
+    const trains = state.vehicles.filter(v => v.kind === 'TRAIN');
+
+    lines.push('');
+    lines.push(sep);
+    lines.push('--- JÁRMŰFLOTTA ---');
+    lines.push(sep);
+    lines.push('KAMIONOK:');
+    if (trucks.length === 0) {
+        lines.push('Még nincs saját kamionod.');
+    } else {
+        for (const v of trucks) {
+            lines.push(formatVehicleLine(v));
+        }
+    }
+
+    lines.push('');
+    lines.push(sep);
+    lines.push('VONATOK:');
+    if (trains.length === 0) {
+        lines.push('Még nincs saját vonatod.');
+    } else {
+        for (const v of trains) {
+            lines.push(formatVehicleLine(v));
+        }
+    }
+
+    lines.push('');
+    lines.push(sep);
+    lines.push('--- ÚTVONALAK ---');
+    lines.push(sep);
+
+    const unlocked = state.routes.filter(r => r.unlocked);
+    if (unlocked.length === 0) {
+        lines.push('Még nincs feloldott útvonalad!');
+    } else {
+        for (const r of unlocked) {
+            const cargoText = r.assignedCargoName || 'Még nincs termék beállítva!';
+            lines.push(`[${r.id}] ${r.sourceName} -> ${r.destinationName} (${r.typeName},${r.distance} km) - Termék: ${cargoText}`);
+            const vIds = r.assignedVehicleIds || [];
+            if (vIds.length === 0) {
+                lines.push('\tMég nincsenek járművek az útvonalon.');
+            } else {
+                const vStr = vIds.map(id => {
+                    const v = vehicleById.get(id);
+                    return `*${id} Típus: ${v ? v.versionName : '?'}`;
+                }).join('  ');
+                lines.push(`\tJárművek: ${vStr}`);
+            }
+        }
+    }
+
+    return lines.join('\n');
+}
+
+async function copyCliStats() {
+    if (!gameState) return;
+    try {
+        await navigator.clipboard.writeText(buildCliStatisticsText(gameState));
+        showToast('CLI statisztika a vágólapra másolva!', 'success');
+    } catch (_) {
+        showToast('Nem sikerült a vágólapra másolás.', 'error');
+    }
+}
+
 // ===== COMMAND ACTIONS =====
 async function handleUnlockRoute(routeId) {
     const res = await apiFetch('/api/routes/unlock', {
@@ -2246,6 +3369,70 @@ async function confirmLoadGame(saveName) {
     showToast(res.message, 'success');
 }
 
+// ===== START SCREEN / MAIN MENU ACTIONS =====
+function openStartScreen() {
+    const overlay = document.getElementById('startOverlay');
+    const wasOpen = overlay.classList.contains('open');
+    overlay.classList.add('open');
+    if (!wasOpen) {
+        loadStartScreenSaves();
+        const input = document.getElementById('startCompanyNameInput');
+        if (input) {
+            setTimeout(() => { input.focus(); input.select(); }, 50);
+        }
+    }
+}
+
+function closeStartScreen() {
+    const overlay = document.getElementById('startOverlay');
+    if (overlay) overlay.classList.remove('open');
+}
+
+async function loadStartScreenSaves() {
+    const listEl = document.getElementById('startSavesList');
+    if (!listEl) return;
+    listEl.innerHTML = '<div style="color:var(--text-muted); font-size:12px;">Mentések keresése...</div>';
+    try {
+        const data = await apiFetch('/api/saves');
+        if (!data.saves || data.saves.length === 0) {
+            listEl.innerHTML = '<div class="empty-state" style="padding:18px 8px; font-size:12px;">Nincs elérhető mentés a <code>saves/</code> mappában.<br>Indíts új játékot a bal oldalon!</div>';
+            return;
+        }
+        listEl.innerHTML = data.saves.map(s => `
+            <div class="save-list-item">
+                <span style="font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">💾 ${escapeHtml(s)}</span>
+                <button class="btn-blue" onclick="loadGameFromStartMenu('${escapeHtml(s)}')">Betöltés</button>
+            </div>
+        `).join('');
+    } catch (_) {
+        listEl.innerHTML = '<div class="empty-state" style="padding:18px 8px; font-size:12px;">Nem sikerült lekérni a mentéseket.</div>';
+    }
+}
+
+async function startNewGameFromMenu() {
+    const input = document.getElementById('startCompanyNameInput');
+    const companyName = input ? input.value.trim() : '';
+    const res = await apiFetch('/api/game/new', {
+        method: 'POST',
+        body: JSON.stringify({ companyName })
+    });
+    selection = null;
+    applyState(res.state);
+    fitMapToViewport();
+    showToast(res.message, 'success');
+}
+
+async function loadGameFromStartMenu(saveName) {
+    const res = await apiFetch('/api/game/load', {
+        method: 'POST',
+        body: JSON.stringify({ saveName })
+    });
+    selection = null;
+    applyState(res.state);
+    fitMapToViewport();
+    showToast(res.message, 'success');
+}
+
 function openNewGameModal() {
     const input = document.getElementById('newCompanyNameInput');
     input.value = (gameState && gameState.companyName) ? gameState.companyName : 'Mutyi Bt.';
@@ -2327,7 +3514,7 @@ function showToast(message, type = 'success') {
     }, 4200);
 }
 
-// Close modals on backdrop click or Escape
+// Close modals on backdrop click or Escape + keyboard zoom shortcuts
 document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
     backdrop.addEventListener('click', (e) => {
         if (e.target === backdrop) backdrop.classList.remove('open');
@@ -2337,11 +3524,135 @@ document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+        return;
+    }
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+    if (document.querySelector('.modal-backdrop.open') || document.getElementById('startOverlay').classList.contains('open')) return;
+
+    if (e.key === '+' || e.key === '=') {
+        zoomBy(1.25);
+    } else if (e.key === '-' || e.key === '_') {
+        zoomBy(1 / 1.25);
+    } else if (e.key === '0') {
+        fitMapToViewport();
     }
 });
 
+// ===== PROCEDURAL MAP TERRAIN DECORATION =====
+function renderTerrainDecor() {
+    const layer = document.getElementById('terrainDecorLayer');
+    if (!layer) return;
+    layer.innerHTML = '';
+
+    // 1. Stylized wheatfields near farms (P_FAR_1 & P_FAR_2)
+    const fields = [
+        { x: 1120, y: 810, w: 120, h: 68, rot: -12 },
+        { x: 1470, y: 820, w: 115, h: 64, rot: 14 },
+        { x: 1310, y: 1030, w: 128, h: 62, rot: -6 },
+        { x: 2630, y: 1680, w: 140, h: 74, rot: -14 },
+        { x: 2820, y: 1620, w: 125, h: 66, rot: 10 },
+        { x: 2740, y: 1960, w: 145, h: 68, rot: -8 },
+        { x: 2560, y: 1950, w: 115, h: 60, rot: 12 }
+    ];
+    for (const f of fields) {
+        const g = svgEl('g', { transform: `translate(${f.x}, ${f.y}) rotate(${f.rot})`, opacity: '0.42' });
+        g.appendChild(svgEl('rect', {
+            x: -f.w / 2, y: -f.h / 2, width: f.w, height: f.h, rx: 10,
+            fill: '#a17c32', stroke: '#d4b054', 'stroke-width': 2
+        }));
+        for (let fy = -f.h / 2 + 12; fy < f.h / 2 - 6; fy += 12) {
+            g.appendChild(svgEl('line', {
+                x1: -f.w / 2 + 8, y1: fy, x2: f.w / 2 - 8, y2: fy,
+                stroke: '#e5c76b', 'stroke-width': 2.2, opacity: '0.6'
+            }));
+        }
+        layer.appendChild(g);
+    }
+
+    // 2. Stylized mountains & ridges near Vashegy Bánya (P_MIN_1) & north-east
+    const mountains = [
+        { x: 2180, y: 740, s: 1.35 }, { x: 2295, y: 790, s: 1.05 }, { x: 2050, y: 710, s: 0.95 },
+        { x: 2230, y: 1080, s: 1.15 }, { x: 2350, y: 1040, s: 0.9 },
+        { x: 2350, y: 210, s: 1.3 }, { x: 2460, y: 245, s: 1.0 },
+        { x: 1810, y: 1090, s: 0.85 }, { x: 2880, y: 920, s: 1.25 }, { x: 2960, y: 970, s: 0.95 }
+    ];
+    for (const m of mountains) {
+        const g = svgEl('g', { transform: `translate(${m.x}, ${m.y}) scale(${m.s})`, opacity: '0.58' });
+        g.appendChild(svgEl('ellipse', { cx: 8, cy: 36, rx: 62, ry: 14, fill: 'rgba(0,0,0,0.22)' }));
+        g.appendChild(svgEl('polygon', { points: '0,-44 -58,34 58,34', fill: '#475569', stroke: '#334155', 'stroke-width': 2.5 }));
+        g.appendChild(svgEl('polygon', { points: '0,-44 0,34 58,34', fill: '#334155' }));
+        g.appendChild(svgEl('polygon', { points: '0,-44 -17,-18 -6,-23 3,-15 16,-20', fill: '#cbd5e1', opacity: '0.75' }));
+        layer.appendChild(g);
+    }
+
+    // 3. Arid sandy dunes & rocky outcrops near oil basin (P_OIL_1)
+    const dunes = [
+        { x: 240, y: 1790, rx: 75, ry: 24 },
+        { x: 290, y: 1990, rx: 85, ry: 26 },
+        { x: 770, y: 1960, rx: 70, ry: 22 },
+        { x: 760, y: 1780, rx: 58, ry: 20 }
+    ];
+    for (const d of dunes) {
+        layer.appendChild(svgEl('ellipse', {
+            cx: d.x, cy: d.y, rx: d.rx, ry: d.ry,
+            fill: 'rgba(180, 140, 74, 0.24)',
+            stroke: 'rgba(217, 179, 108, 0.28)',
+            'stroke-width': 2
+        }));
+    }
+
+    // 4. Stylized pine tree groves (around forests & scenic edges)
+    const trees = [
+        // North-west & around Öregtölgy Erdészet (P_FOR_1)
+        { x: 145, y: 165, s: 1.2 }, { x: 210, y: 205, s: 0.95 }, { x: 120, y: 255, s: 1.05 },
+        { x: 960, y: 145, s: 1.25 }, { x: 1030, y: 185, s: 1.0 }, { x: 1095, y: 135, s: 0.9 },
+        { x: 1455, y: 130, s: 1.2 }, { x: 1525, y: 170, s: 1.0 }, { x: 1590, y: 125, s: 1.1 },
+        { x: 1460, y: 365, s: 0.95 }, { x: 1520, y: 395, s: 0.85 },
+        // Around Sötétvölgyi Fatelep (P_FOR_2)
+        { x: 1390, y: 1185, s: 1.1 }, { x: 1445, y: 1215, s: 0.9 },
+        { x: 1765, y: 1365, s: 1.2 }, { x: 1830, y: 1320, s: 0.95 }, { x: 1815, y: 1405, s: 1.0 },
+        { x: 1365, y: 1525, s: 1.1 }, { x: 1425, y: 1555, s: 0.9 },
+        // Western, southern & eastern scenic woods
+        { x: 125, y: 1060, s: 1.25 }, { x: 190, y: 1120, s: 1.0 }, { x: 140, y: 1210, s: 1.1 },
+        { x: 165, y: 1460, s: 1.15 }, { x: 225, y: 1515, s: 0.95 },
+        { x: 1080, y: 1950, s: 1.2 }, { x: 1150, y: 1990, s: 0.95 }, { x: 1220, y: 1945, s: 1.1 },
+        { x: 1840, y: 1960, s: 1.15 }, { x: 1910, y: 2010, s: 0.95 },
+        { x: 2875, y: 1245, s: 1.25 }, { x: 2945, y: 1295, s: 1.0 }, { x: 2825, y: 1325, s: 0.9 },
+        { x: 2770, y: 690, s: 1.15 }, { x: 2835, y: 730, s: 0.95 }, { x: 2910, y: 680, s: 1.05 }
+    ];
+    for (const t of trees) {
+        const g = svgEl('g', { transform: `translate(${t.x}, ${t.y}) scale(${t.s})`, opacity: '0.78' });
+        g.appendChild(svgEl('ellipse', { cx: 5, cy: 18, rx: 19, ry: 7, fill: 'rgba(0,0,0,0.26)' }));
+        g.appendChild(svgEl('rect', { x: -3.5, y: 2, width: 7, height: 16, rx: 2, fill: '#5c4033' }));
+        g.appendChild(svgEl('polygon', { points: '0,-32 -22,6 22,6', fill: '#1b4d2e' }));
+        g.appendChild(svgEl('polygon', { points: '0,-44 -17,-10 17,-10', fill: '#266b3d' }));
+        g.appendChild(svgEl('polygon', { points: '0,-44 0,-10 17,-10', fill: '#1f5a33' }));
+        layer.appendChild(g);
+    }
+
+    // 5. Cartographic Compass Rose (top-right open corner)
+    const cg = svgEl('g', { transform: 'translate(2920, 175)', opacity: '0.45' });
+    cg.appendChild(svgEl('circle', { cx: 0, cy: 0, r: 58, fill: 'rgba(15, 23, 42, 0.35)', stroke: '#a7f3d0', 'stroke-width': 2 }));
+    cg.appendChild(svgEl('circle', { cx: 0, cy: 0, r: 46, fill: 'none', stroke: '#a7f3d0', 'stroke-width': 1, 'stroke-dasharray': '4 5' }));
+    cg.appendChild(svgEl('polygon', { points: '0,-46 -11,0 0,-10 11,0', fill: '#fbbf24' }));
+    cg.appendChild(svgEl('polygon', { points: '0,46 -11,0 0,10 11,0', fill: '#94a3b8' }));
+    cg.appendChild(svgEl('polygon', { points: '46,0 0,-10 10,0 0,10', fill: '#94a3b8' }));
+    cg.appendChild(svgEl('polygon', { points: '-46,0 0,-10 -10,0 0,10', fill: '#94a3b8' }));
+    const nLabel = svgEl('text', {
+        x: 0, y: -68, 'text-anchor': 'middle', 'dominant-baseline': 'middle',
+        fill: '#fbbf24', 'font-size': '18', 'font-weight': '900'
+    });
+    nLabel.textContent = 'É';
+    cg.appendChild(nLabel);
+    layer.appendChild(cg);
+}
+
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
+    renderTerrainDecor();
+    initMapInteraction();
+    fitMapToViewport();
     loadState();
 });
 </script>
